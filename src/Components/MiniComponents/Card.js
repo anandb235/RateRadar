@@ -1,5 +1,5 @@
 import React from 'react'
-import '../style/Cardone.css'
+import '../../style/Card.css'
 
 function Cardone(props) {
     return (

@@ -1,0 +1,13 @@
+.card-one {
+    width: 30vw;
+    height: 36vh;
+    position: absolute;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 2em;
+
+    border-radius: 25px;
+    box-shadow: 1px 1px 10px 3px rgba(0,0,0,.24);
+
+    background-color: #1F1B24;
+}
