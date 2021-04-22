@@ -1,0 +1,45 @@
+card-head {
+    margin: 10px 20px 0px 20px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #FFFFFF
+}
+
+card-title {
+    font-size: 35px
+}
+
+currency-converter {
+    font-size: 25px;
+    margin-right: 10px;
+    align-self: flex-end
+}
+
+current-currency {
+    color: #3b4ab8
+}
+
+table {
+    margin: 0px 20px 0px 30px;
+    color: #3b4ab8;
+    font-size: 25px;
+    display: flex;
+    flex-direction: column; 
+    overflow: auto;
+}
+
+table > tbody > tr > th,td {
+    width: 15vw;
+    text-align: center;
+}
+
+table > tbody > tr > th:nth-child(1),td:nth-child(1) {
+    width: 35vw;
+    text-align: left;
+}
+
+.data-table {
+    height: 27vh;
+    color: #FFFFFF;
+    font-size: 18px;
+}
