@@ -1,12 +1,12 @@
 import React from 'react'
-import Card from './MiniComponents/Card'
+import '../style/Card.css'
 
 function Compare() {
 
-    const compareChart = { "margin": "30vh 0vw 0vh 20vh", "width": "80vw", "height": "65vh" }
+    const compareChart = { "margin": "27vh 0vw 0vh 20vh", "width": "80vw", "height": "65vh" }
 
     return (
-        <Card prop = { compareChart } />
+        <div className="card" style={ compareChart }></div>
     )
 }
 
