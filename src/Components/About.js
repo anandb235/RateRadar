@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from './MiniComponents/Card'
+import '../style/Card.css'
 
 function About() {
 
@@ -8,8 +8,8 @@ function About() {
 
     return (
         <div>
-            <Card prop = { RateRadar } />
-            <Card prop = { Developer } />
+            <div className="card" style={ RateRadar }></div>
+			<div className="card" style={ Developer }></div>
         </div>
     )
 }
