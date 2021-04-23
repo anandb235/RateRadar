@@ -1,0 +1,25 @@
+.contact-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.quote {
+    font-size: 40px;
+    text-align: center;
+}
+
+.socials {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    margin-top: 5vh;
+}
+
+.socials > a {
+    text-decoration: none;
+    font-size: 30px;
+    color: #3b4ab8;
+}
