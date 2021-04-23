@@ -43,3 +43,66 @@ table > tbody > tr > th:nth-child(1),td:nth-child(1) {
     color: #FFFFFF;
     font-size: 18px;
 }
+
+.bag-head {
+    margin: 10px 20px 0px 20px;
+    display: flex;
+    justify-content: center;
+    border-bottom: 2px solid #FFFFFF
+}
+
+.bag-title {
+    font-size: 35px;
+    text-align: center;
+}
+
+.vals {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.current-val {
+    margin-top: 6vh;
+    font-size: 60px;
+    color: #3b4ab8;
+    font-weight: lighter;
+}
+
+.current-val-dec {
+    font-size: 30px;
+}
+
+.currency {
+    margin-left: 1vw;
+    font-size: 30px;
+    color: #FFFFFF;
+}
+
+.gain-loss {
+    font-size: 28px;
+}
+
+.gain-loss-val {
+    margin-left: 0.7vw;
+    padding: 1px 4px 1px 4px;
+    background: #CF6679;
+    color: #000000;
+    border-radius: 5px;
+}
+
+.invested {
+    margin-top: 2vh;
+    font-size: 27px;
+}
+
+.invested-val {
+    margin-left: 1vw;
+    color: #3b4ab8;
+}
