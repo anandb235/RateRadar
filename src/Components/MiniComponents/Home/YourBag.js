@@ -5,7 +5,7 @@ function YourBag() {
     const yourbag = { "margin": "12vh 10vw 0vh 70vw", "width": "25vw", "height": "45vh" }
 
     return (
-        <card className="card" style={ yourbag }>
+        <div className="card" style={ yourbag }>
             <div className="bag-head">
                 <span className="bag-title">Your Bag</span>
             </div>
@@ -14,7 +14,7 @@ function YourBag() {
                 <span className="gain-loss">Gain/Loss: <span className="gain-loss-val">-1.69</span> </span>
                 <span className="invested">Invested: <span className="invested-val">200.00</span> </span>
             </div>
-        </card>
+        </div>
     )
 }
 
