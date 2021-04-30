@@ -11,10 +11,10 @@ function Contact() {
             <span className="quote">Don't Feel Shy<br />To Say Hi !</span>
 
             <div className="socials">
-                <a href="#">Github</a>
-                <a href="#">LinkedIn</a>
-                <a href="#">Gmail</a>
-                <a href="#">Instagram</a>
+                <a href="https://www.google.com">Github</a>
+                <a href="https://www.google.com">LinkedIn</a>
+                <a href="https://www.google.com">Gmail</a>
+                <a href="https://www.google.com">Instagram</a>
             </div>
         </div>
     )
