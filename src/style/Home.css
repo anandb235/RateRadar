@@ -20,28 +20,28 @@ current-currency {
 }
 
 table {
-    margin: 0px 20px 0px 30px;
+    margin: 0px 20px 0px 20px;
     color: #3b4ab8;
-    font-size: 25px;
+    font-size: 27px;
     display: flex;
     flex-direction: column; 
     overflow: auto;
 }
 
 table > tbody > tr > th,td {
-    width: 15vw;
+    width: 10vw;
     text-align: center;
 }
 
 table > tbody > tr > th:nth-child(1),td:nth-child(1) {
-    width: 35vw;
+    width: 34vw;
     text-align: left;
 }
 
 .data-table {
     height: 27vh;
     color: #FFFFFF;
-    font-size: 18px;
+    font-size: 23px;
 }
 
 .bag-head {
