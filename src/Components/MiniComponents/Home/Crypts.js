@@ -1,7 +1,5 @@
 import React from 'react'
 
-import data from '../../../data/Data'
-
 function Crypts() {
 
     const currency = { "margin": "12vh 0vw 0vh 5vw", "width": "60vw", "height": "45vh" }
@@ -10,7 +8,7 @@ function Crypts() {
     const proxyUrl = process.env.REACT_APP_PROXY_SERVER_URL
     const apiKey = process.env.REACT_APP_API_KEY
 
-    // let coins
+    let coinData = ''
 
     fetch(`${proxyUrl}${baseUrl}`, {
         method: 'GET',
@@ -23,15 +21,29 @@ function Crypts() {
     .then((response) => {
         if(response.ok) {
             response.json().then((res) => {
-                // let coins = res.data.coins
-                console.table(res.data.coins)
-                res.data.coins.map(coin => (
-                    `<tr key=${coin.uuid}>
-                        <td>${coin.name}</td>
-                        <td>${coin.price}</td>
-                        <td>${coin.change}</td>
-                    </tr>`
-                ))
+
+                res.data.coins.forEach((coin) => {
+
+                    let price = Math.round((parseFloat(coin.price) + Number.EPSILON) * 1000) / 1000
+                    let change = Math.round((parseFloat(coin.change) + Number.EPSILON) * 100) / 100
+
+                    let bgcolor = '#1F1B24'
+                    let color = 'white'
+
+                    if(change < 0) {
+                        bgcolor = '#CF6679'
+                        color = 'black'
+                    }
+
+                    coinData += `<tr key=${coin.uuid}>`
+                    coinData +=     `<td>${coin.name}</td>`
+                    coinData +=     `<td>${price}</td>`
+                    coinData +=     `<td style=color:${color};background-color:${bgcolor};border-radius:5px;>${change}</td>`
+                    coinData += `</tr>`
+
+                })
+
+                document.getElementById('coins').innerHTML = coinData
             })
         }
     })
@@ -43,7 +55,7 @@ function Crypts() {
             <card-head>
                 <card-title>Crypts</card-title>
                 <currency-converter style={ { "textAlign": "right" } }>
-                    Currency: <current-currency>INR</current-currency>
+                    Currency: <current-currency>USD</current-currency>
                 </currency-converter>
             </card-head>
             <table>
@@ -57,15 +69,7 @@ function Crypts() {
             </table>
 
             <table className="data-table">
-                <tbody>
-                {data.map(data => (
-                        <tr key={data.id}>
-                            <td>{data.name}</td>
-                            <td>{data.price}</td>
-                            <td>{data.growth}</td>
-                        </tr>
-                    ))}
-                </tbody>
+                <tbody id="coins"></tbody>
             </table>
         </div>
     )
