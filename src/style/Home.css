@@ -33,6 +33,11 @@ table > tbody > tr > th,td {
     text-align: center;
 }
 
+.price-column {
+    display: inline-table;
+    margin-left: -1px;
+}
+
 table > tbody > tr > th:nth-child(1),td:nth-child(1) {
     width: 34vw;
     text-align: left;
