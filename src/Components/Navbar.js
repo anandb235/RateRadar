@@ -12,6 +12,12 @@ function Navbar() {
             </div>
             <div className="nav">
                 <span>Rate<span style={ { "color": "#3b4ab8" } }>Radar</span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                <div className="navs">
+                    <span className="active">Home</span>
+                    <span>Compare</span>
+                    <span>About</span>
+                    <span>Contact</span>
+                </div>
             </div>
         </div>
     )
