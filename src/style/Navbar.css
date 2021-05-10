@@ -44,8 +44,8 @@
     letter-spacing: 3px;
 }
 
-.navs > .active {
-    color: #3b4ab8;
+.nav-item .active {
+    color: #3b4ab8 !important;
     font-weight: bold;
 }
 

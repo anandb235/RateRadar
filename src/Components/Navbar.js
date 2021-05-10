@@ -17,22 +17,22 @@ function Navbar() {
                 <span>Rate<span style={ { "color": "#3b4ab8" } }>Radar</span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
                 <div className="navs">
                     <span className="nav-item">
-                        <NavLink style={ navStyle } exact to="/">
+                        <NavLink style={ navStyle } exact to="/" activeClassName="active">
                             <span id="home">Home</span>
                         </NavLink>
                     </span>
                     <span className="nav-item">
-                        <NavLink style={ navStyle } to="/compare">
+                        <NavLink style={ navStyle } to="/compare" activeClassName="active">
                             <span id="compare">Compare</span>
                         </NavLink>
                     </span>
                     <span className="nav-item">
-                        <NavLink style={ navStyle } to="/about">
+                        <NavLink style={ navStyle } to="/about" activeClassName="active">
                             <span id="about">About</span>
                         </NavLink>
                     </span>
                     <span className="nav-item">
-                        <NavLink style={ navStyle } to="/contact">
+                        <NavLink style={ navStyle } to="/contact" activeClassName="active">
                             <span id="contact">contact</span>
                         </NavLink>
                     </span>
