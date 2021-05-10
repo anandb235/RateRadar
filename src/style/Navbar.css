@@ -50,3 +50,26 @@
     color: #3b4ab8;
     font-weight: bold;
 }
+
+.bag-btn {
+    position: absolute;
+    right: 1em;
+    margin-top: -1vh;
+}
+
+.bag-btn > button {
+    font-size: 17px;
+    font-weight: bold;
+    background: #3b4ab8;
+    cursor: pointer;
+    color: black;
+    border: none;
+    border-radius: 7px;
+    padding: 5px 10px;
+
+    transition: all 0.1s;
+}
+
+.bag-btn > button:hover {
+    transform: scale(1.03, 1.05);
+}
