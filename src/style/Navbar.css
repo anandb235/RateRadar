@@ -1,16 +1,25 @@
-.nav {
+.navStyle {
     position: absolute;
-    height: 100vh;
-    width: 100vw;
-    color: antiquewhite;
-    background-color: #121212;
-
-    transform: translateX(-100%);
-    transition: none;
+    margin: 3vh 0vw 0vh 2vw;
+    display: flex;
+    justify-content: center;
 }
 
-.nav.nav-slide {
-    transform: translateX(0%);
-    z-index: 2;
-    transition: transform 0.7s ease-out;
+.logo {
+    height: 7vh;
+    width: 5vw;
+    margin-top: -1vh;
+}
+
+.logo img {
+    height: 100%;
+}
+
+.nav {
+    width: 90vw !important;
+    color: #FFFFFF;
+    font-size: 40px;
+    margin-top: -2vh;
+    display: flex;
+    align-items: center;
 }
