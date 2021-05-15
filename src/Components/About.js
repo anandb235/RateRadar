@@ -15,13 +15,37 @@ function About() {
     return (
         <div>
             <div className="card about" style={ about }>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aspernatur maxime temporibus molestiae accusantium nam iusto amet reiciendis laboriosam consequuntur? Quas numquam fugiat harum odio eaque nam natus minus nesciunt rem.</p>
+                <p>Heyy,&nbsp;
+                    <span style={{ "color": "#3b4ab8" }}>Welcome to&nbsp;
+                        <span style={{ "fontWeight": "bolder" }}>RateRadar</span>!
+                    </span><br />
+                    Here you can get familiar to the latest ups downs of life of investors... Just kidding XD 
+                    This Web App lets you to be up to date with all happenings of crypto market 
+                    by providing you with all real time data, all thanks to Coingecko API.
+                </p>
             </div>
             <img src={ Logo } style={ logo } alt="Logo"></img>
             <div className="role">Developer</div>
             <img src={ SelfImage } style={ { ...selfImage, "borderRadius": "50%" } } alt="Logo"></img>
 			<div className="card about" style={ dev }>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sapiente aliquam ducimus illum aperiam, qui quibusdam.</p>
+                <p>Myself,&nbsp;
+                    <span style={{ "color": "#3b4ab8", "fontWeight": "bolder" }}>
+                        Anand Borkar
+                    </span>,<br />
+                    a Web Development aficionado studying Bachelor of Engineering<br /> @
+                    <a
+                        href="http://siesgst.edu.in"
+                        style={{ "color": "#3b4ab8" }}>
+                        SIESGST, Navi Mumbai
+                    </a><br />
+                    <span style={{ "fontSize": "20px" }}>Contribute to this project&nbsp;
+                        <a
+                            href="https://github.com/anandb235/RateRadar"
+                            style={{ "color": "#3b4ab8", "textDecoration": "none" }}>
+                            here
+                        </a>
+                    </span>
+                </p>
             </div>
         </div>
     )
