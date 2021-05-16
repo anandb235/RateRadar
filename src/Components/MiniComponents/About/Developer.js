@@ -14,7 +14,7 @@ function Developer() {
 			<div className="card about" style={ dev }>
                 <p>Myself,&nbsp;
                     <span style={{ "color": "#3b4ab8", "fontWeight": "bolder" }}>
-                        Samprit Chaurasiya
+                        Anand Borkar
                     </span>,<br />
                     a Web Development aficionado studying Bachelor of Engineering<br /> @
                     <a
