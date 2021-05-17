@@ -10,7 +10,7 @@ function Developer() {
 	return (
 		<div>
 			<div className="role">Developer</div>
-			<img src={ SelfImage } style={ { ...selfImage, "borderRadius": "50%" } } alt="Logo"></img>
+			<img src={ SelfImage } style={ { ...selfImage, "borderRadius": "50%" } } alt="Dev's Image"></img>
 			<div className="card about" style={ dev }>
                 <p>Myself,&nbsp;
                     <span style={{ "color": "#3b4ab8", "fontWeight": "bolder" }}>
