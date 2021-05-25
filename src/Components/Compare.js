@@ -18,11 +18,11 @@ function Compare() {
             <div className="card" style={compareChart}>
                 <div class="container">
 
-                    <CompareCoin coin="Bitcoin" />
+                    <CompareCoin coin="bitcoin" />
 
                     <VersusAnimation />
 
-                    <CompareCoin coin="Ethereum" />
+                    <CompareCoin coin="ethereum" />
 
                 </div>
             </div>
