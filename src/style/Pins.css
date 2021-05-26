@@ -1,0 +1,37 @@
+.pins {
+	margin: 67vh 0vw 0vh 46vw;
+	width: 8vw;
+	height: 25vh;
+	color: #fff;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.pin-head {
+	font-size: 2em;
+	color: #3b4ab8;
+}
+
+.apply-btn {
+	background: #3b4ab8;
+	color: black;
+	font-weight: bolder;
+	font-size: 1em;
+	outline: none;
+	border: none;
+	border-radius: 5px;
+}
+
+.ui.selection.dropdown {
+    min-width: 8em !important;
+    background: #121212 !important;
+    color: white !important;
+	caret-color: white;
+}
+
+.ui.search.dropdown.active > input.search, .ui.search.dropdown.visible > input.search {
+	color: white;
+}
