@@ -22,12 +22,12 @@ function Compare() {
 		let listItems = []
 
 		axios
-			.get('https://api.coingecko.com/api/v3/coins')
+			.get('https://api.coingecko.com/api/v3/coins/list')
 			.then(res => {
 				res.data.map(coin => {
 					listItems.push({
 						key: coin.id,
-						text: coin.id,
+						text: coin.name,
 						value: coin.id
 					})
 					return null
