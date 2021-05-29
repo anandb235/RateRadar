@@ -5,16 +5,15 @@ function Crypts() {
 
     const currency = { "margin": "12vh 0vw 0vh 5vw", "width": "60vw", "height": "45vh" }
 
-    const baseUrl = process.env.REACT_APP_API_URL
-    let coinData = ''
+    const baseUrl = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd'
+    let coinData = ""
 
     axios
         .get(baseUrl)
         .then(res => {
             res.data.map((coin) => {
-
-                let price = Math.round((parseFloat(coin.market_data.current_price.usd) + Number.EPSILON) * 1000) / 1000
-                let change = Math.round((parseFloat(coin.market_data.price_change_percentage_24h) + Number.EPSILON) * 100) / 100
+                let price = Math.round((parseFloat(coin.current_price) + Number.EPSILON) * 1000) / 1000
+                let change = Math.round((parseFloat(coin.price_change_percentage_24h) + Number.EPSILON) * 100) / 100
 
                 let bgcolor = '#1F1B24'
                 let color = 'white'
