@@ -42,13 +42,13 @@ function CompareCoin(props) {
 
 				const obj = res.data
 				const marketData = obj.market_data
-				const cap = marketData.market_cap.usd
-				const circ = marketData.circulating_supply
-				const tot = marketData.total_supply
+				const cap = marketData.market_cap.usd || ''
+				const circ = marketData.circulating_supply || ''
+				const tot = marketData.total_supply || ''
 
 				setData({
 					marketRank: obj.market_cap_rank,
-					currentPrice: marketData.current_price.usd,
+					currentPrice: marketData.current_price.usd || 0,
 					marketCap: bigNumFormat(parseFloat(cap), cap.length),
 					circSupply: bigNumFormat(parseFloat(circ), circ.length),
 					totalSupply: (tot !== null) ? bigNumFormat(parseFloat(tot), tot.length) : "na",
