@@ -20,7 +20,7 @@ function PinCharts2(props) {
             let price = []
 
             axios
-                .get(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=usd&days=1&interval=hourly`)
+                .get(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=usd&days=1`)
                 .then(res => {
                     res.data.prices.map(item => {
                         time.push(formatter(item[0]))
