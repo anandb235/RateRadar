@@ -1,125 +1,20 @@
-card-head {
-    margin: 10px 20px 0px 20px;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 2px solid #FFFFFF
+.home-container {
+    display: grid;
+    grid-template:
+      "a  b" 0.9fr
+      "c  c" 1fr / 1.5fr 1fr;
+    background: var(--background);
+    width: 100%;
+    height: 100%;
+    gap: 15px;
+    flex: 1;
+    padding: 2vh 1vw;
 }
 
-card-title {
-    font-size: 35px
+.crypt-card {
+    grid-area: a;
 }
 
-currency-converter {
-    font-size: 25px;
-    margin-right: 10px;
-    align-self: flex-end
-}
-
-current-currency {
-    color: #3b4ab8
-}
-
-table {
-    margin: 0px 20px 0px 20px;
-    color: #3b4ab8;
-    font-size: 27px;
-    display: flex;
-    flex-direction: column; 
-    overflow: auto;
-}
-
-table > tbody > tr > th,td {
-    width: 10vw;
-    text-align: center;
-}
-
-.price-column {
-    display: inline-table;
-    margin-left: -1px;
-}
-
-table > tbody > tr > th:nth-child(1),td:nth-child(1) {
-    width: 34vw;
-    text-align: left;
-}
-
-.data-table {
-    height: 27vh;
-    color: #FFFFFF;
-    font-size: 23px;
-}
-
-.bag-head {
-    margin: 10px 20px 0px 20px;
-    display: flex;
-    justify-content: center;
-    border-bottom: 2px solid #FFFFFF
-}
-
-.bag-title {
-    font-size: 35px;
-    text-align: center;
-}
-
-.vals {
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
-
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.current-val {
-    margin-top: 6vh;
-    font-size: 60px;
-    color: #3b4ab8;
-    font-weight: lighter;
-}
-
-.current-val-dec {
-    font-size: 30px;
-}
-
-.currency {
-    margin-left: 1vw;
-    font-size: 30px;
-    color: #FFFFFF;
-}
-
-.gain-loss {
-    font-size: 28px;
-}
-
-.gain-loss-val {
-    margin-left: 0.7vw;
-    padding: 1px 4px 1px 4px;
-    background: #CF6679;
-    color: #000000;
-    border-radius: 5px;
-}
-
-.invested {
-    margin-top: 2vh;
-    font-size: 27px;
-}
-
-.invested-val {
-    margin-left: 1vw;
-    color: #3b4ab8;
-}
-
-.tag{
-    text-align: center;
-    position: absolute;
-    left: 26%;
-    margin-top: 3vh;
-    font-size: 15px;
-    border: 1px solid #3b4ab8;
-    display: inline-block;
-    padding: 1px 4px 1px 4px;
-    border-radius: 5px;
+.your-bag-card {
+    grid-area: b;
 }

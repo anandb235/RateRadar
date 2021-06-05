@@ -7,9 +7,9 @@ import Pins from './MiniComponents/Home/Pins'
 import '../style/Card.css'
 import '../style/Home.css'
 
-function Home() {
+const Home = () => {
     return (
-        <div>
+        <div className="home-container">
 			<Crypts />
 			<YourBag />
 			<Pins />
@@ -17,4 +17,4 @@ function Home() {
     )
 }
 
-export default Home
+export default Home;
