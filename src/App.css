@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: "Noto Sans", sans-serif;
+}
+
+#root {
+    height: 100vh;
+}
+
+/*light mode*/
+/*:root {*/
+/*    --primary: #3b4ab8;*/
+/*    --secondary: #75cd96;*/
+/*    --on-primary: #fff;*/
+/*    --on-secondary: #000;*/
+/*    --primary-variant: #3543a5;*/
+/*    --secondary-variant: #2f9455;*/
+/*    --background: #fff;*/
+/*    --surface: #fff;*/
+/*    --error: #b83b4b;*/
+/*    --on-background: #000;*/
+/*    --on-surface: #000;*/
+/*    --on-error: #fff;*/
+/*}*/
+:root {
+    --h1-font-size: 95px;
+    --h1-font-weight: 300;
+    --h1-letter-spacing: -1.5px;
+    --h2-font-size: 59px;
+    --h2-font-weight: 300;
+    --h2-letter-spacing: -0.5px;
+    --h3-font-size: 48px;
+    --h3-font-weight: 400;
+    --h3-letter-spacing: 0px;
+    --h4-font-size: 34px;
+    --h4-font-weight: 400;
+    --h4-letter-spacing: 0.25px;
+    --h5-font-size: 24px;
+    --h5-font-weight: 400;
+    --h5-letter-spacing: 0px;
+    --h6-font-size: 20px;
+    --h6-font-weight: 500;
+    --h6-letter-spacing: 0.15px;
+    --subtitle1-font-size: 16px;
+    --subtitle1-font-weight: 400;
+    --subtitle1-letter-spacing: 1.5px;
+    --subtitle2-font-size: 14px;
+    --subtitle2-font-weight: 500;
+    --subtitle2-letter-spacing: 1px;
+    --body1-font-size: 16px;
+    --body1-font-weight: 400;
+    --body1-letter-spacing: 0.5px;
+    --body2-font-size: 14px;
+    --body2-font-weight: 400;
+    --body2-letter-spacing: 0.25px;
+    --button-font-size: 14px;
+    --button-font-weight: 500;
+    --button-letter-spacing: 1.25px;
+    --caption-font-size: 12px;
+    --caption-font-weight: 400;
+    --caption-letter-spacing: 0.4px;
+    --overline-font-size: 10px;
+    --overline-font-weight: 400;
+    --overline-letter-spacing: 1.5px;
+
+}
+
+/*darkmode*/
+:root {
+    --primary: #3b4ab8;
+    --secondary: #75cd96;
+    --on-primary: #dfdfdf;
+    --on-secondary: #0e0e0e;
+    --primary-variant: #3543a5;
+    --secondary-variant: #2f9455;
+    --background: #2c2c2c;
+    --surface: #1e1e1e;
+    --error: #b83b4b;
+    --on-background: #dfdfdf;
+    --on-surface: #dfdfdf;
+    --on-error: #dfdfdf;
+}
+
+.router-container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background: var(--background);
+    flex-direction: column;
+}
