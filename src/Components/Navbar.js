@@ -1,48 +1,37 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 import '../style/Navbar.css'
 import Logo from '../assets/RateRadar.svg'
 
-function Navbar() {
-
-    const navStyle = { "textDecoration": "none", "color": "#ffffff" }
+const Navbar = () => {
 
     return (
-        <div className="navStyle">
+        <div className="nav-style">
             <div className="logo">
-                <img src={Logo} alt="RR" />
+                <img src={Logo} alt="RR"/>
             </div>
             <div className="nav">
-                <span>Rate<span style={ { "color": "#3b4ab8" } }>Radar</span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-                <div className="navs">
-                    <span className="nav-item">
-                        <NavLink style={ navStyle } exact to="/" activeClassName="active">
-                            <span id="home">Home</span>
-                        </NavLink>
-                    </span>
-                    <span className="nav-item">
-                        <NavLink style={ navStyle } to="/compare" activeClassName="active">
-                            <span id="compare">Compare</span>
-                        </NavLink>
-                    </span>
-                    <span className="nav-item">
-                        <NavLink style={ navStyle } to="/about" activeClassName="active">
-                            <span id="about">About</span>
-                        </NavLink>
-                    </span>
-                    <span className="nav-item">
-                        <NavLink style={ navStyle } to="/contact" activeClassName="active">
-                            <span id="contact">contact</span>
-                        </NavLink>
-                    </span>
+                <span>Rate<span style={{"color": "var(--primary)"}}>Radar</span></span>
+                <div className="vertical-divider"></div>
+                <div className="nav-list">
+                    <NavItem to="/" navId="home" text="Home"/>
+                    <NavItem to="/compare" navId="compare" text="Compare"/>
+                    <NavItem to="/about" navId="about" text="About"/>
+                    <NavItem to="/contact" navId="contact" text="Contact"/>
                 </div>
-                <div className="bag-btn">
-                    <button>Populate Bag</button>
-                </div>
+                <button className="bag-btn">Populate Bag</button>
             </div>
         </div>
     )
 }
+
+const NavItem = ({to, navId, text}) => <div className="nav-item">
+    <NavLink
+        to={to}
+        activeClassName="active">
+        <span id={`${navId}`}>{text}</span>
+    </NavLink>
+</div>
 
 export default Navbar

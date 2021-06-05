@@ -1,73 +1,87 @@
-.navStyle {
-    position: absolute;
-    margin: 3vh 0vw 0vh 2vw;
+.nav-style {
+    position: relative;
+    padding: 2vh 3vh;
     display: flex;
     justify-content: center;
+    background: var(--surface);
+    gap:  15px;
 }
 
 .logo {
-    height: 7vh;
+    height: 100%;
     width: 5vw;
-    margin-top: -1vh;
+    padding: 3vh 0;
+    position: relative;
 }
 
 .logo img {
     height: 100%;
+    width:  100%;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 
 .nav {
-    width: 90vw !important;
-    color: #FFFFFF;
+    color: var(--on-surface);
     font-size: 40px;
-    margin-top: -2vh;
     display: flex;
     align-items: center;
+    flex: auto;
+    gap: 20px;
+    vertical-align: center;
 }
 
-.navs {
-    width: 33vw !important;
+.nav-list {
     font-size: 20px;
-    margin-top: 1vh;
-
     display: flex;
-    justify-content: space-between;
+    flex: auto;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
 }
 
-.navs span {
+.nav-item span {
     letter-spacing: 2px;
-    transition: all 0.1s;
+    transition: all 0.3s ease;
+    display: inline-block;
 }
 
-.navs span:hover {
-    transform: scale(1.05);
-    color: #2b3bb4;
-    letter-spacing: 3px;
+.nav-item span:hover {
+    transform: scale(1.1);
+    color: var(--secondary);
+    transform-origin: center;
 }
 
 .nav-item .active {
-    color: #3b4ab8 !important;
+    color: var(--primary) !important;
     font-weight: bold;
+}
+
+.nav-item a {
+    text-decoration: none;
+    color: var(--on-surface);
 }
 
 .bag-btn {
-    position: absolute;
-    right: 1em;
-    margin-top: -1vh;
-}
-
-.bag-btn > button {
     font-size: 17px;
     font-weight: bold;
-    background: #3b4ab8;
+    background: var(--secondary);
     cursor: pointer;
-    color: black;
+    color: var(--on-secondary);
     border: none;
     border-radius: 7px;
     padding: 5px 10px;
-
     transition: all 0.1s;
+    align-self: center;
 }
 
-.bag-btn > button:hover {
+.bag-btn:hover {
     transform: scale(1.03, 1.05);
+}
+
+.vertical-divider {
+    height: 100%;
+    width: 3px;
+    background: var(--on-surface);
 }
