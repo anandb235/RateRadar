@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 
 import Home from './Components/Home'
 import Compare from './Components/Compare'
@@ -9,18 +9,20 @@ import Navbar from './Components/Navbar'
 
 import './App.css'
 
-function App() {
-	return (
-		<Router>
-			<Navbar />
-			<Switch>
-				<Route path="/" exact component={ Home } />
-				<Route path="/compare" component={ Compare } />
-				<Route path="/about" component={ About } />
-				<Route path="/contact" component={ Contact } />
-			</Switch>
-		</Router>
-	)
+const App = () => {
+    return (
+        <Router>
+            <div className="router-container">
+                <Navbar/>
+                <Switch>
+                    <Route path="/" exact component={Home}/>
+                    <Route path="/compare" component={Compare}/>
+                    <Route path="/about" component={About}/>
+                    <Route path="/contact" component={Contact}/>
+                </Switch>
+            </div>
+        </Router>
+    )
 }
 
 export default App
