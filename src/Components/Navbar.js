@@ -28,8 +28,10 @@ const Navbar = () => {
 
 const NavItem = ({to, navId, text}) => <div className="nav-item">
     <NavLink
+        exact
         to={to}
-        activeClassName="active">
+        className={({isActive})=> isActive ? "active" : ""}
+        end>
         <span id={`${navId}`}>{text}</span>
     </NavLink>
 </div>
