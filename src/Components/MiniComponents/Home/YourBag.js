@@ -1,19 +1,29 @@
 import React from 'react'
+import "../../../style/YourBag.css"
 
-function YourBag() {
-
-    const yourbag = { "margin": "12vh 10vw 0vh 70vw", "width": "25vw", "height": "45vh" }
+const YourBag = () => {
+    const gain = -1.69
+    const invested = 200.00
+    const total = invested + gain
+    const total_int = Math.floor(total)
+    const total_decimal = Math.floor((total - total_int).toFixed(3)*1000)
 
     return (
-        <div className="card" style={ yourbag }>
+        <div className="card your-bag-card">
             <div className="bag-head">
                 <span className="bag-title">Your Bag</span>
+                <div className="coming-soon-tag">Feature Coming Soon!</div>
             </div>
-            <div className='tag'>Feature Coming Soon!</div>
-            <div className="vals">
-                <span className="current-val">000<span className="current-val-dec">.000</span><span className="currency">INR</span></span>
-                <span className="gain-loss">Gain/Loss: <span className="gain-loss-val">-1.69</span> </span>
-                <span className="invested">Invested: <span className="invested-val">200.00</span> </span>
+            <div className="horizontal-divider"></div>
+            <div className="bag-value">
+                <span className="current-val">{total_int}
+                    <span className="current-val-dec">.{total_decimal}</span>
+                    <span className="currency">USD</span>
+                </span>
+                <span className="gain-loss">Gain/Loss:
+                    <span className={`gain-loss-val ${gain < 0 ? "loss" : "gain"}`}>{gain}</span>
+                </span>
+                <span className="invested">Invested: <span className="invested-val">{invested}</span></span>
             </div>
         </div>
     )
