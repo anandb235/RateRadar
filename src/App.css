@@ -83,6 +83,7 @@
     --on-background: #dfdfdf;
     --on-surface: #dfdfdf;
     --on-error: #dfdfdf;
+    --secondary-translucent: rgba(117, 205, 150, 0.1);
 }
 
 .router-container {
