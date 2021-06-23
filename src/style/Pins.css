@@ -1,15 +1,3 @@
-.pins {
-	margin: 67vh 0vw 0vh 46vw;
-	width: 8vw;
-	height: 25vh;
-	color: #fff;
-
-	display: flex;
-	flex-direction: column;
-	justify-content: space-evenly;
-	align-items: center;
-}
-
 .pin-head {
 	font-size: 2em;
 	color: #3b4ab8;
@@ -25,13 +13,37 @@
 	border-radius: 5px;
 }
 
-.ui.selection.dropdown {
-    min-width: 8em !important;
-    background: #121212 !important;
-    color: white !important;
-	caret-color: white;
+.pin-card {
+	grid-area: c;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	/*overflow-x: auto;*/
+	/*overflow-y: visible;*/
 }
 
-.ui.search.dropdown.active > input.search, .ui.search.dropdown.visible > input.search {
-	color: white;
+.chart1 {
+	flex: 3.5
+}
+
+.dropdown-area {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items:  center;
+	gap: 15px;
+}
+.chart2 {
+	flex: 3.5;
+}
+
+.chart1, .chart2 {
+	border: 2px dashed var(--secondary);
+	display: flex;
+	justify-content: center;
+}
+
+.dropdown1,.dropdown2 {
+	z-index: 1;
 }
