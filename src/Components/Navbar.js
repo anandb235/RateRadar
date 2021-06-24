@@ -1,8 +1,8 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 
-import '../style/Navbar.css'
-import Logo from '../assets/RateRadar.svg'
+import '../Style/Navbar.css'
+import Logo from '../Assets/RateRadar.svg'
 
 const Navbar = () => {
 

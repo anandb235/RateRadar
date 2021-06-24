@@ -1,6 +1,6 @@
 import React from 'react'
 
-import SelfImage from '../../../assets/SelfImage.jpg'
+import SelfImage from '../../../Assets/SelfImage.jpg'
 import Contact from "./Contact";
 
 const Developer = () => {

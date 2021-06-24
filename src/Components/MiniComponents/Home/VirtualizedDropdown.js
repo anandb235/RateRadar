@@ -1,7 +1,7 @@
 import React, {forwardRef, useCallback, useRef, useState} from "react"
 import {Dropdown, Ref} from "semantic-ui-react"
 import {FixedSizeList} from "react-window"
-import "../../../style/VirtualizedDropdown.css"
+import "../../../Style/VirtualizedDropdown.css"
 
 const SUI_DROPDOWN_MENU_HEIGHT = 300
 const SUI_DROPDOWN_MENU_ITEM_HEIGHT = 37

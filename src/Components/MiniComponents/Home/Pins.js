@@ -1,7 +1,7 @@
 import React, {useEffect, useMemo, useState} from 'react'
 import axios from 'axios'
 
-import '../../../style/Pins.css'
+import '../../../Style/Pins.css'
 import ArrowSvg from './ArrowSvg'
 import 'semantic-ui-css/components/dropdown.css'
 import 'semantic-ui-css/components/reset.css'

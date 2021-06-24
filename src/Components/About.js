@@ -1,7 +1,7 @@
 import React from 'react'
 
-import '../style/About.css'
-import '../style/Card.css'
+import '../Style/About.css'
+import '../Style/Card.css'
 import Brand from './MiniComponents/About/Brand'
 import Developer from './MiniComponents/About/Developer'
 

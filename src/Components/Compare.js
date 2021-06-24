@@ -4,8 +4,9 @@ import VersusAnimation from './MiniComponents/Compare/VersusAnimation'
 import { Dropdown } from 'semantic-ui-react'
 import axios from 'axios'
 
-import '../style/Compare.css'
-import '../style/Card.css'
+import '../Style/Compare.css'
+import '../Style/Card.css'
+import VirtualizedDropdown from "./MiniComponents/Home/VirtualizedDropdown";
 
 function Compare() {
 	const compareChart = {

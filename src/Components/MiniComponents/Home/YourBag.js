@@ -1,5 +1,5 @@
 import React from 'react'
-import "../../../style/YourBag.css"
+import "../../../Style/YourBag.css"
 
 const YourBag = () => {
     const gain = -1.69
