@@ -18,7 +18,6 @@ const Navbar = () => {
                     <NavItem to="/" navId="home" text="Home"/>
                     <NavItem to="/compare" navId="compare" text="Compare"/>
                     <NavItem to="/about" navId="about" text="About"/>
-                    <NavItem to="/contact" navId="contact" text="Contact"/>
                 </div>
                 <button className="bag-btn">Populate Bag</button>
             </div>

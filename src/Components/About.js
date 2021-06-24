@@ -5,10 +5,9 @@ import '../style/Card.css'
 import Brand from './MiniComponents/About/Brand'
 import Developer from './MiniComponents/About/Developer'
 
-function About() {
-
+const About = () => {
     return (
-        <div>
+        <div  className="about-container">
             <Brand />
             <Developer />
         </div>
