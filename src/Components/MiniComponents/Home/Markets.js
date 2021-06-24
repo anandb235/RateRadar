@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios'
-import '../../../style/Markets.css'
+import '../../../Style/Markets.css'
 
 const Markets = () => {
 

@@ -1,11 +1,11 @@
 import React from 'react'
 
-import '../../../style/Card.css'
-import '../../../style/Contact.css'
-import Github from '../../../assets/Octicons-mark-github.svg'
-import Linkedin from '../../../assets/LinkedIn_icon.svg'
-import Gmail from '../../../assets/Gmail_icon_(2020).svg'
-import Instagram from '../../../assets/Instagram_logo_2016.svg'
+import '../../../Style/Card.css'
+import '../../../Style/Contact.css'
+import Github from '../../../Assets/Octicons-mark-github.svg'
+import Linkedin from '../../../Assets/LinkedIn_icon.svg'
+import Gmail from '../../../Assets/Gmail_icon_(2020).svg'
+import Instagram from '../../../Assets/Instagram_logo_2016.svg'
 
 function Contact() {
     // const contactCss = { "margin": "22vh 0vw 0vh 33vw", "width": "34vw", "height": "63vh" }

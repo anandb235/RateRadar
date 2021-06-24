@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Logo from '../../../assets/RateRadar.svg'
+import Logo from '../../../Assets/RateRadar.svg'
 
 const Brand = () => {
 
