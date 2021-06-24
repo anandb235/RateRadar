@@ -1,38 +1,33 @@
 import React from 'react'
 
 import SelfImage from '../../../assets/SelfImage.jpg'
+import Contact from "./Contact";
 
-function Developer() {
-
-    const selfImage = { "margin": "65vh 0vw 0vh 18vw", "width": "200px", "height": "200px" }
-    const dev = { "margin": "65vh 0vw 0vh 37vw", "width": "40vw", "height": "30vh" }
-
-	return (
-		<div>
-			<div className="role">Developer</div>
-			<img src={ SelfImage } style={ { ...selfImage, "borderRadius": "50%" } } alt="Dev's Image"></img>
-			<div className="card about" style={ dev }>
-                <p>Myself,&nbsp;
-                    <span style={{ "color": "#3b4ab8", "fontWeight": "bolder" }}>
-                        Anand Borkar
-                    </span>,<br />
-                    a Web Development aficionado studying Bachelor of Engineering<br /> @
-                    <a
-                        href="http://siesgst.edu.in"
-                        style={{ "color": "#3b4ab8" }}>
-                        SIESGST, Navi Mumbai
-                    </a><br />
-                    <span style={{ "fontSize": "20px" }}>Contribute to this project&nbsp;
-                        <a
-                            href="https://github.com/anandb235/RateRadar"
-                            style={{ "color": "#3b4ab8", "textDecoration": "none" }}>
-                            here
-                        </a>
-                    </span>
+const Developer = () => {
+    return (
+        <div className="developer-container">
+            <div className="role">Developer</div>
+            <img src={SelfImage} alt="Dev"></img>
+            <div className="card developer-card">
+                <p>
+                    I'm&nbsp;
+                    <span>Anand Borkar</span> —
+                    a web development enthusiast currently pursuing my Bachelor of Engineering
+                    at
+                    <a href="http://siesgst.edu.in"> SIES Graduate School of Technology, Navi Mumbai</a>.
+                    <br/>
+                    <br/>
+                    I'm always eager to learn, build, and collaborate on exciting tech projects.
+                    <br/>
+                    <br/>
+                    Feel free to explore the <a href="https://github.com/anandb235/RateRadar">repository</a>,
+                    dive into the codebase, suggest improvements, or contribute new features to help this
+                    project grow!
                 </p>
             </div>
-		</div>
-	)
+            <Contact/>
+        </div>
+    )
 }
 
 export default Developer

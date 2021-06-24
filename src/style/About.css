@@ -1,27 +1,94 @@
-.about {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.about-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 20px 35px;
+    gap: 20px;
 }
 
-img {
-	position: absolute;
+.about-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: justify;
+    flex: 1;
+    padding: 0 50px;
+    height: 100%;
+}
+
+.about-card img {
+    width: 200px;
+    height: 200px;
+}
+
+.about-card p {
+    font-size: var(--h5-font-size);
+    font-weight: var(--h5-font-weight);
+    letter-spacing: var(--h5-letter-spacing);
+    padding-right: 35px;
+}
+
+.about-card p span:nth-child(2) {
+    color: var(--primary);
+}
+
+.about-card p span:nth-child(3) {
+    color: var(--secondary);
+}
+
+.about-card p span:nth-child(1),
+.about-card p span:nth-child(2),
+.about-card p span:nth-child(3) {
+    font-weight: 600;
+}
+
+.about-card a {
+    font-weight: var(--h5-font-weight);
+}
+
+.developer-container {
+    display: flex;
+    padding: 0 20px;
+    gap: 50px;
+    align-items: center;
+    flex: 1;
+    height: 100%;
+}
+
+.developer-card {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.developer-card > p {
+    font-size: var(--h6-font-size);
+    font-weight: var(--h6-font-weight);
+    letter-spacing: var(--h6-letter-spacing);
+    text-align: justify;
+}
+
+.developer-card > p > span {
+    color: var(--primary);
 }
 
 .role {
-	position: absolute;
-	color: #121212;
-	height: fit-content;
-	width: fit-content;
-	font-size: 40px;
-
-	text-shadow: 1px 5px 0 #3b4ab8;
-
-	margin: 75vh 0vw 0vh 5vw;
-	transform: rotate(-90deg);
+    position: absolute;
+    color: var(--on-secondary);
+    font-size: var(--h4-font-size);
+    font-weight:  900;
+    letter-spacing:  var(--h4-letter-spacing);
+    text-shadow: 1px 5px 0 var(--secondary);
+    transform: rotate(270deg) translate(0, -50px);
 }
 
-p {
-	font-size: 1.5rem;
-	margin: 0rem 2rem;
+.developer-container > img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 3px dashed var(--secondary);
+    padding: 2px;
+    margin-left: 100px;
 }

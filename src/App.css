@@ -93,3 +93,11 @@
     background: var(--background);
     flex-direction: column;
 }
+
+a, a.visited {
+    color: var(--secondary);
+}
+
+a.visited, a.active {
+    color: var(--primary);
+}
