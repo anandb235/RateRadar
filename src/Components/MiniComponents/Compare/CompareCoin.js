@@ -1,70 +1,18 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React from 'react'
+import VirtualizedDropdown from "../Home/VirtualizedDropdown";
+import {useCoinInfoData} from "../../../Hooks/useCoinInfoData";
 
-function CompareCoin(props) {
+const CompareCoin = ({coin, options, onChange, className}) => {
 
-	const dataObj = {
-		marketRank: "NA",
-		currentPrice: "NA",
-		marketCap: "NA",
-		circSupply: "NA",
-		totalSupply: "NA",
-		percentChange: {
-			day: "NA",
-			week: "NA",
-			month: "NA",
-			year: "NA"
-		}
-	}
+    const {data, loading, error} = useCoinInfoData(coin)
 
-	function bigNumFormat(num, digits) {
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
-		const lookup = [
-			{ value: 1, symbol: "" },
-			{ value: 1e3, symbol: "k" },
-			{ value: 1e6, symbol: "M" },
-			{ value: 1e9, symbol: "B" }
-		]
-
-		const rx = /\.0+$|(\.[0-9]*[1-9])0+$/
-		var item = lookup.slice().reverse().find(item => num >= item.value)
-
-		return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + " " + item.symbol : "0"
-	}
-
-	const coinName = props.coin
-	const [data, setData] = useState(dataObj)
-
-	const compareChart = () => {
-		axios
-			.get("https://api.coingecko.com/api/v3/coins/" + coinName + "/")
-			.then(res => {
-
-				const obj = res.data
-				const marketData = obj.market_data
-				const cap = marketData.market_cap.usd || ''
-				const circ = marketData.circulating_supply || ''
-				const tot = marketData.total_supply || ''
-
-				setData({
-					marketRank: obj.market_cap_rank,
-					currentPrice: marketData.current_price.usd || 0,
-					marketCap: bigNumFormat(parseFloat(cap), cap.length),
-					circSupply: bigNumFormat(parseFloat(circ), circ.length),
-					totalSupply: (tot !== null) ? bigNumFormat(parseFloat(tot), tot.length) : "na",
-					percentChange: {
-						day: marketData.price_change_percentage_24h,
-						week: marketData.price_change_percentage_7d,
-						month: marketData.price_change_percentage_30d,
-						year: marketData.price_change_percentage_1y
-					}
-				})
-			})
-	}
-
-	useEffect(() => {
-		compareChart()
-	})
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
 	return (
 		<div class="coin">
