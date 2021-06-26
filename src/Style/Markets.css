@@ -25,7 +25,7 @@
     color: var(--primary);
 }
 
-table {
+.market-card table {
     font-size: var(--body1-font-size);
     font-weight: var(--body1-font-weight);
     letter-spacing: var(--body1-letter-spacing);
@@ -35,21 +35,23 @@ table {
     height: 33vh;
 }
 
-tr > th {
+.market-card tr > th {
     color: var(--primary);
 }
 
-tr td:first-child {
+.market-card tr td:first-child {
     color: var(--on-surface);
 }
 
-tr > th, td {
+.market-card tr > th,
+.market-card tr > td {
     width: 10vw;
     text-align: center;
     color: var(--primary);
 }
 
-tr > th:nth-child(1), td:nth-child(1) {
+.market-card tr > th:nth-child(1),
+.market-card tr > td:nth-child(1) {
     width: 34vw;
     text-align: left;
 }
