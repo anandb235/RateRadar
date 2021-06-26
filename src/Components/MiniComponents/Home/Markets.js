@@ -22,7 +22,7 @@ const Markets = () => {
                 </div>
             </div>
             <div className="horizontal-divider"></div>
-            <table>
+            <table className="market-price-table">
                 <thead className="header-row">
                 <tr>
                     <th>Currency</th>
