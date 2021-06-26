@@ -1,0 +1,121 @@
+.compare-card {
+	height: 100%;
+	margin: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+}
+
+.compare-coin-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+	gap: 20px;
+
+}
+
+.lists {
+	width: fit-content;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+ul {
+	list-style-type: none;
+	font-size: var(--h5-font-size);
+	font-weight: var(--h5-font-weight);
+	letter-spacing: var(--h5-letter-spacing);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+ul:nth-child(2) {
+	padding: 0 10px;
+	color: var(--secondary);
+}
+
+.percent-change {
+	font-size: var(--h6-font-size);
+	font-weight: var(--h6-font-weight);
+	letter-spacing: var(--h6-letter-spacing);
+}
+
+.percent-table {
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	overflow: auto;
+}
+
+.percent-table tr {
+	display: flex;
+	gap: 10px;
+	width: 40vw;
+}
+
+.percent-table thead,
+.percent-table tbody {
+	display:  flex;
+	justify-content: center;
+}
+
+.percent-table > thead th {
+	background: var(--secondary);
+	border-radius: 5px;
+	color: var(--on-secondary);
+	font-size: var(--h6-font-size);
+	font-weight: var(--h6-font-weight);
+	letter-spacing:  var(--h6-letter-spacing);
+}
+
+.percent-table tr > th,
+.percent-table tr > td {
+	font-size: var(--h6-font-size);
+	font-weight: var(--h6-font-weight);
+	letter-spacing: var(--h6-letter-spacing);
+	padding: 5px;
+	text-align: center;
+	flex: 1;
+	align-items: center;
+}
+
+.animate {
+	position: relative;
+	opacity: 1;
+	z-index: 2;
+	animation: versus 0.5s ease-out;
+}
+
+@keyframes versus {
+	0% {
+		transform: scale(5, 3);
+		opacity: 1;
+	}
+	60% {
+		transform: scale(0.5, 0.5);
+		opacity: 0;
+	}
+	100% {
+		transform: scale(1, 1);
+		opacity: 1;
+	}
+}
+
+.dropdown-container {
+	display: flex;
+	align-items:  center;
+}
+
+.versus-span {
+	font-size: var(--button-font-size);
+	font-weight: var(--button-font-weight);
+	letter-spacing: var(--button-letter-spacing);
+	text-transform: uppercase;
+	color: var(--secondary);
+}

@@ -14,49 +14,55 @@ const CompareCoin = ({coin, options, onChange, className}) => {
         return <div>Error: {error}</div>;
     }
 
-	return (
-		<div class="coin">
-			<span class="coin-head">{props.coin}</span>
-			<div className="lists">
-				<ul>
-					<li>Rank</li>
-					<li>Current Price</li>
-					<li>Market Capital</li>
-					<li>Circulating Supply</li>
-					<li>Total Supply</li>
-				</ul>
-				<ul>
-					<li>:</li>
-					<li>:</li>
-					<li>:</li>
-					<li>:</li>
-					<li>:</li>
-				</ul>
-				<ul>
-					<li>{data.marketRank}</li>
-					<li>{data.currentPrice}</li>
-					<li>{data.marketCap}</li>
-					<li>{data.circSupply}</li>
-					<li>{data.totalSupply}</li>
-				</ul>
-			</div>
-			<span className="percent-change">Percent Change in Last...</span>
-			<table className="percent-table">
-				<tr className="t-head">
-					<td style={{ width: "10vw" }}>24 Hrs</td>
-					<td>1 Week</td>
-					<td>1 Month</td>
-					<td>1 Year</td>
-				</tr>
-				<tr>
-					<td style={{ width: "10vw" }}>{data.percentChange.day}</td>
-					<td>{data.percentChange.week}</td>
-					<td>{data.percentChange.month}</td>
-					<td>{data.percentChange.year}</td>
-				</tr>
-			</table>
-		</div>
-	)
+    return (
+        <div className={`compare-coin-container ${className}`}>
+            <VirtualizedDropdown
+                value={coin}
+                options={options}
+                onChange={onChange}/>
+            <div className="lists">
+                <ul>
+                    <li>Rank</li>
+                    <li>Current Price</li>
+                    <li>Market Capital</li>
+                    <li>Circulating Supply</li>
+                    <li>Total Supply</li>
+                </ul>
+                <ul>
+                    <li>:</li>
+                    <li>:</li>
+                    <li>:</li>
+                    <li>:</li>
+                    <li>:</li>
+                </ul>
+                <ul>
+                    <li>{data.marketRank}</li>
+                    <li>{data.currentPrice}</li>
+                    <li>{data.marketCap}</li>
+                    <li>{data.circSupply}</li>
+                    <li>{data.totalSupply}</li>
+                </ul>
+            </div>
+            <span className="percent-change">Percent Change in Last...</span>
+            <table className="percent-table">
+                <thead>
+                <tr>
+                    <th>24 Hrs</th>
+                    <th>1 Week</th>
+                    <th>1 Month</th>
+                    <th>1 Year</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{data.percentChange.day}</td>
+                    <td>{data.percentChange.week}</td>
+                    <td>{data.percentChange.month}</td>
+                    <td>{data.percentChange.year}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>)
 }
 
 export default CompareCoin
