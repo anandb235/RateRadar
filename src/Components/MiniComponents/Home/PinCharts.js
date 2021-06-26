@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react'
-import axios from 'axios'
+import React from 'react'
 import {Line} from 'react-chartjs-2'
+import {useCoinMarketChartData} from "../../../Hooks/useCoinMarketChartData";
 
 function PinCharts({coin, className}) {
     const onSurfaceColor = getComputedStyle(document.documentElement).getPropertyValue('--on-surface').trim();
@@ -9,7 +9,7 @@ function PinCharts({coin, className}) {
     const overlineFontSize = getComputedStyle(document.documentElement).getPropertyValue('--overline-font-size').trim();
     const overlineFontWeight = getComputedStyle(document.documentElement).getPropertyValue('--overline-font-weight').trim();
     const overlineLineSpacing = getComputedStyle(document.documentElement).getPropertyValue('--overline-line-spacing').trim();
-    const [chartData, setChartData] = useState({})
+
     const customTicks = {
         grid: {
             color: secondaryTranslucentColor, // Change the color of the x-axis grid lines
@@ -44,51 +44,20 @@ function PinCharts({coin, className}) {
         },
     }
 
-    useEffect(() => {
-        const chart = (coin) => {
+    const {coinMarketData, loading, error} = useCoinMarketChartData(coin)
 
-            let time = []
-            let price = []
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
-            axios
-                .get(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=usd&days=1`)
-                .then(res => {
-                    res.data["prices"].map(item => {
-                        time.push(formatter(item[0]))
-                        price.push(item[1])
-                        return null
-                    })
-
-                    function formatter(timestamp) {
-                        const date = new Date(timestamp).getDate();
-                        const month = new Date(timestamp).getMonth() + 1
-                        const hour = new Date(timestamp).getHours()
-                        return date + "/" + month + ": " + hour;
-                    }
-
-                    setChartData({
-                        labels: time,
-                        datasets: [{
-                            label: coin.toUpperCase(),
-                            data: price,
-                            backgroundColor: '#3b4ab8',
-                            borderWidth: 1,
-                            borderColor: '#3b4ab8'
-                        }]
-                    })
-                })
-                .catch(err => {
-                    console.log(err)
-                })
-        }
-        chart(coin)
-    }, [coin])
-
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     return (
         <div className={`card ${className}`}>
             <div style={{width: '100%', height: '100%'}}>
-                <Line data={chartData} type="line" options={chartOptions}/>
+                <Line data={coinMarketData} type="line" options={chartOptions}/>
             </div>
         </div>
     )

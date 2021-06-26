@@ -1,35 +1,17 @@
-import React, {useEffect, useState} from 'react'
-import axios from 'axios'
+import React from 'react'
 import '../../../Style/Markets.css'
+import {useMarketData} from "../../../Hooks/useMarketData";
 
 const Markets = () => {
+    const { marketData, loading, error } = useMarketData(); // Corrected destructuring
 
-    const baseUrl = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd'
-    const [coinData, setCoinData] = useState([]);
+    if (loading) {
+        return <div>Loading...</div>; // Optional: Show loading state
+    }
 
-    useEffect(() => {
-        axios
-            .get(baseUrl)
-            .then(res => {
-                const formattedData = res.data.map(coin => {
-                    const price = Math.round((parseFloat(coin["current_price"]) + Number.EPSILON) * 1000) / 1000;
-                    const change = Math.round((parseFloat(coin["price_change_percentage_24h"]) + Number.EPSILON) * 100) / 100;
-
-                    return {
-                        id: coin.id,
-                        name: coin.name,
-                        price: price,
-                        change: change,
-                        bgColor: change < 0 ? 'var(--error)' : 'var(--surface)',
-                        color: change < 0 ? 'var(--on-error)' : 'var(--secondary)',
-                    };
-                });
-                setCoinData(formattedData);
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    }, [baseUrl]);
+    if (error) {
+        return <div>Error: {error}</div>; // Optional: Show error state
+    }
 
     return (
         <div className="card market-card">
@@ -49,7 +31,7 @@ const Markets = () => {
                 </tr>
                 </thead>
                 <tbody>
-                {coinData.map(coin => (
+                {marketData.map(coin => ( // Use marketData instead of data
                     <tr key={coin.id}>
                         <td>{coin.name}</td>
                         <td>{coin.price}</td>

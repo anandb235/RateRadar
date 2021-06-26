@@ -1,109 +1,55 @@
-import React, { useState, useEffect } from 'react'
+import React, {useState} from 'react'
 import CompareCoin from './MiniComponents/Compare/CompareCoin'
 import VersusAnimation from './MiniComponents/Compare/VersusAnimation'
-import { Dropdown } from 'semantic-ui-react'
-import axios from 'axios'
 
 import '../Style/Compare.css'
 import '../Style/Card.css'
-import VirtualizedDropdown from "./MiniComponents/Home/VirtualizedDropdown";
+import {useCoinListData} from "../Hooks/useCoinListData";
 
-function Compare() {
-	const compareChart = {
-		margin: '27vh 0vw 0vh 20vh',
-		width: '80vw',
-		height: '65vh'
-	}
+const Compare = () => {
 
-	const [opts, setOpts] = useState([])
-	const [selectedCoin1, setselectedCoin1] = useState('bitcoin')
-	const [selectedCoin2, setselectedCoin2] = useState('ethereum')
+    const [selectedCoin1, setSelectedCoin1] = useState('bitcoin')
+    const [selectedCoin2, setSelectedCoin2] = useState('ethereum')
 
-	const dropdownData = () => {
-		let listItems = []
+    const {coinList, loading, error} = useCoinListData();
 
-		axios
-			.get('https://api.coingecko.com/api/v3/coins/list')
-			.then(res => {
-				res.data.map(coin => {
-					listItems.push({
-						key: coin.id,
-						text: coin.name,
-						value: coin.id
-					})
-					return null
-				})
-				setOpts(listItems)
-			})
-			.catch(err => {
-				console.log(err)
-			})
-	}
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
-	useEffect(() => {
-		dropdownData()
-	}, [])
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
-	const handleDropDownSelect1 = (event, data) => {
-		setselectedCoin1(data.value)
-	}
+    const handleDropDownSelect = (event, data, dropdown) => {
+        if (dropdown === 1) {
+            setSelectedCoin1(data.value);
+        }
 
-	const handleDropDownSelect2 = (event, data) => {
-		setselectedCoin2(data.value)
-	}
+        if (dropdown === 2) {
+            setSelectedCoin2(data.value);
+        }
+    }
 
-	return (
-		<>
-			<div
-				style={{
-					position: 'absolute',
-					margin: '20vh 0vw 0vh 39vw',
-					display: 'flex'
-				}}
-			>
-				<div className="drop-a">
-					<Dropdown
-						defaultValue="bitcoin"
-						placeholder="Coin 1"
-						onChange={handleDropDownSelect1}
-						search
-						selection
-						style={{ innerWidth: '2em' }}
-						options={opts}
-					/>
-				</div>
-				<span
-					style={{
-						color: '#3b4ab8',
-						fontWeight: 'bolder',
-						marginTop: '14px'
-					}}
-				>
-					V/S
-				</span>
-				<div className="drop-b">
-					<Dropdown
-						defaultValue="ethereum"
-						placeholder="Coin 2"
-						onChange={handleDropDownSelect2}
-						search
-						selection
-						style={{ innerWidth: '2em' }}
-						options={opts}
-					/>
-				</div>
-			</div>
-			<div className="card" style={compareChart}>
-				<div class="container">
-					<CompareCoin coin={selectedCoin1} />
+    return (
+        <>
+            <div className="card compare-card">
+                <CompareCoin
+                    className="compare-section-1"
+                    coin={selectedCoin1}
+                    onChange={(event, data) => handleDropDownSelect(event, data, 1)}
+                    options={coinList}/>
 
-					<VersusAnimation />
+                <VersusAnimation/>
 
-					<CompareCoin coin={selectedCoin2} />
-				</div>
-			</div>
-		</>
-	)
+                <CompareCoin
+                    className="compare-section-2"
+                    coin={selectedCoin2}
+                    onChange={(event, data) => handleDropDownSelect(event, data, 2)}
+                    options={coinList}/>
+            </div>
+        </>
+    )
 }
 
 export default Compare
