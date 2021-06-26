@@ -43,7 +43,3 @@
 	display: flex;
 	justify-content: center;
 }
-
-.dropdown1,.dropdown2 {
-	z-index: 1;
-}
