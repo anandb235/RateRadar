@@ -14,7 +14,7 @@ const Pins = () => {
     const [selectedCoin1, setSelectedCoin1] = useState('bitcoin')
     const [selectedCoin2, setSelectedCoin2] = useState('ethereum')
 
-    const { coinList, loading, error } = useCoinListData();
+    const {coinList, loading, error} = useCoinListData();
 
     if (loading) {
         return <div>Loading...</div>;
