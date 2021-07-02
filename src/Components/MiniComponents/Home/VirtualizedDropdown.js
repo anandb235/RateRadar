@@ -1,90 +1,110 @@
-import React, {forwardRef, useCallback, useRef, useState} from "react"
-import {Dropdown, Ref} from "semantic-ui-react"
-import {FixedSizeList} from "react-window"
-import "../../../Style/VirtualizedDropdown.css"
+import React from 'react'
+import ReactSelect, {createFilter} from 'react-select'
+import {FixedSizeList as List} from 'react-window'
+import '../../../Style/VirtualizedDropdown.css'
 
-const SUI_DROPDOWN_MENU_HEIGHT = 300
-const SUI_DROPDOWN_MENU_ITEM_HEIGHT = 37
 
-const VirtualizedDropdown = ({
-                                 options, value, className,
-                                 ...restProps
-                             }) => {
-    const dropdownRef = useRef()
-    const listRef = useRef()
+export const VirtualizedDropdown = ({value, options, handleOnChange, arrowPosition = "right", compare = false}) => {
 
-    const [open, setOpen] = useState(false)
+    const IndicatorSeparator = () => null;
 
-    const OuterDiv = useCallback(({style, ...props}, ref) => {
-        const {position, overflow, ...restStyle} = style
+    const MenuList = (props) => {
+        const itemHeight = 50
+        const {options, children, maxHeight} = props
+        const index = options.findIndex(i => i.value === value.value)
+        const initialOffset = index * itemHeight
+
+        return Array.isArray(children) ? (
+            <div style={{paddingTop: 4}}>
+                <List
+                    height={maxHeight}
+                    itemCount={children.length}
+                    itemSize={itemHeight}
+                    initialScrollOffset={initialOffset}
+                    width="100%"
+                >
+                    {({index, style}) => <div className="list-item" style={{...style}}>{children[index]}</div>}
+                </List>
+            </div>
+        ) : null
+    }
+
+    const Option = (props) => {
+        const {children, innerProps, getStyles} = props
+
+        // Emulate default react-select styles
+        const customStyles = {
+            ...getStyles('option', props)
+        }
+
         return (
-            <Ref innerRef={ref}>
-                <Dropdown.Menu open={open} {...props} style={restStyle}>
-                    {props.children}
-                </Dropdown.Menu>
-            </Ref>
-        )
-    }, [open])
-
-    const InnerDiv = useCallback(props => {
-        return (
-            <Dropdown.Menu className="inner" open={open} style={{...props.style, maxHeight: props.style.height}}>
-                {props.children}
-            </Dropdown.Menu>
-        )
-    }, [open])
-
-    return (
-        <Dropdown
-            className={`virtualized selection ${className}`}
-            onClose={() => setOpen(false)}
-            onOpen={() => {
-                setOpen(true)
-                listRef.current.scrollToItem(options.findIndex(i => i.value === value))
-            }}
-            // This causes "Warning: Failed prop type: Prop `children` in `Dropdown` conflicts with props: `options`. They cannot be defined together, choose one or the other."
-            // but is necessary for some logic to work e.g. the selected item text.
-            options={options}
-            ref={dropdownRef}
-            selectOnNavigation={false}
-            value={value}
-            {...restProps}
-        >
-            <FixedSizeList
-                height={options.length * SUI_DROPDOWN_MENU_ITEM_HEIGHT < SUI_DROPDOWN_MENU_HEIGHT ? options.length * SUI_DROPDOWN_MENU_ITEM_HEIGHT + 1 : SUI_DROPDOWN_MENU_HEIGHT}
-                innerElementType={InnerDiv}
-                itemCount={options.length}
-                itemData={{
-                    options,
-                    handleClick: (_e, x) => dropdownRef.current.handleItemClick(_e, x),
-                    selectedIndex: options.findIndex(i => i.value === value),
-                }}
-                itemSize={SUI_DROPDOWN_MENU_ITEM_HEIGHT}
-                outerElementType={forwardRef(OuterDiv)}
-                ref={listRef}
+            <div
+                style={customStyles}
+                role="button"
+                id={innerProps.id}
+                tabIndex={innerProps.tabIndex}
+                onClick={innerProps.onClick}
+                onKeyDown={innerProps.onKeyDown}
             >
-                {Row}
-            </FixedSizeList>
-        </Dropdown>
-    )
+                {children}
+            </div>
+        )
+    }
+
+    const customStylesCompare = {
+        container: (provided) => ({
+            ...provided,
+            width: "30vw",
+            backgroundColor: "transparent"
+        }),
+        control: (provided) => ({
+            ...provided,
+            backgroundColor: 'transparent',
+            border: 'none',
+            textTransform: 'capitalize',
+            textAlign: 'center',
+            fontSize: 'var(--h2-font-size)',
+            fontWeight: 'var(--h2-font-weight)',
+            lineHeight: 'var(--h2-line-height)',
+            paddingInlineStart: '50px'
+        }),
+        dropdownIndicator: (provided) => ({
+            ...provided,
+            color: arrowPosition === 'left' ? 'var(--primary)' : 'var(--secondary)'
+        })
+    };
+
+    const customStylesNormal = {
+        container: (provided) => ({
+            ...provided,
+            backgroundColor: "transparent"
+        }),
+        control: (provided) => ({
+            ...provided,
+            backgroundColor: 'transparent',
+            border: 'none',
+            textTransform: 'capitalize',
+            textAlign: 'center',
+            fontSize: 'var(--h6-font-size)',
+            fontWeight: 'var(--h6-font-weight)',
+            lineHeight: 'var(--h6-line-height)',
+        }),
+        dropdownIndicator: (provided) => ({
+            ...provided,
+            color: 'var(--primary)',
+            '&:hover': {color: 'var(--secondary)'},
+        })
+    };
+
+    return <ReactSelect
+        placeholder={value.label}
+        openMenuOnFocus={true}
+        onChange={handleOnChange}
+        options={options}
+        components={{MenuList, Option, IndicatorSeparator}}
+        filterOption={createFilter({ignoreAccents: false})}
+        styles={compare ? customStylesCompare : customStylesNormal}
+        classNamePrefix="react-select"
+        isRtl={arrowPosition === "left"}
+    />
 }
-
-const Row = ({index, style, data}) => {
-    const {options, handleClick, selectedIndex} = data
-    const item = options[index]
-
-    return (
-        <Dropdown.Item
-            active={index === selectedIndex}
-            className="ellipsis"
-            key={item.value}
-            onClick={handleClick}
-            selected={index === selectedIndex}
-            style={style}
-            title={item.text}
-            {...item}
-        />
-    )
-}
-
-export default VirtualizedDropdown
