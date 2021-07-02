@@ -15,31 +15,25 @@
 
 .pin-card {
 	grid-area: c;
-	width: 100%;
+	width: 98vw;
 	height: 100%;
 	display: flex;
-	/*overflow-x: auto;*/
-	/*overflow-y: visible;*/
-}
-
-.chart1 {
-	flex: 3.5
 }
 
 .dropdown-area {
-	flex: 1;
+	/*flex: 1;*/
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items:  center;
 	gap: 15px;
 }
-.chart2 {
-	flex: 3.5;
-}
+
 
 .chart1, .chart2 {
 	border: 2px dashed var(--secondary);
-	display: flex;
+	/*display: flex;*/
 	justify-content: center;
+	flex: 1;
+	max-width: 45vw;
 }
