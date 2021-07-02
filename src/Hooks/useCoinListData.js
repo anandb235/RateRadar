@@ -15,11 +15,12 @@ export const useCoinListData = () => {
         setLoading(true);
         try {
             const res = await axios.get(COIN_GECKO_COIN_LIST_URL);
-            const listItems = res.data.map(coin => ({
-                key: coin.id,
-                text: coin.name,
-                value: coin.id,
-            }));
+            const listItems = res.data.map(coin => {
+                return {
+                    label: coin.name,
+                    value: coin.id,
+                }
+            });
             setCoinList(listItems);
             localStorage.setItem(COIN_LIST_CACHE, JSON.stringify(listItems));
             setRefreshTime(COIN_LIST_CACHE)

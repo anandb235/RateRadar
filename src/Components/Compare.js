@@ -8,8 +8,8 @@ import {useCoinListData} from "../Hooks/useCoinListData";
 
 const Compare = () => {
 
-    const [selectedCoin1, setSelectedCoin1] = useState('bitcoin')
-    const [selectedCoin2, setSelectedCoin2] = useState('ethereum')
+    const [selectedCoin1, setSelectedCoin1] = useState({label: 'bitcoin', value: 'bitcoin'})
+    const [selectedCoin2, setSelectedCoin2] = useState({label: 'ethereum', value: 'ethereum'})
 
     const {coinList, loading, error} = useCoinListData();
 
@@ -21,13 +21,13 @@ const Compare = () => {
         return <div>Error: {error}</div>;
     }
 
-    const handleDropDownSelect = (event, data, dropdown) => {
+    const handleDropDownSelect = (event, dropdown) => {
         if (dropdown === 1) {
-            setSelectedCoin1(data.value);
+            setSelectedCoin1(event);
         }
 
         if (dropdown === 2) {
-            setSelectedCoin2(data.value);
+            setSelectedCoin2(event);
         }
     }
 
@@ -37,16 +37,18 @@ const Compare = () => {
                 <CompareCoin
                     className="compare-section-1"
                     coin={selectedCoin1}
-                    onChange={(event, data) => handleDropDownSelect(event, data, 1)}
-                    options={coinList}/>
+                    onChange={(event) => handleDropDownSelect(event, 1)}
+                    options={coinList}
+                    arrowPosition="left"/>
 
                 <VersusAnimation/>
 
                 <CompareCoin
                     className="compare-section-2"
                     coin={selectedCoin2}
-                    onChange={(event, data) => handleDropDownSelect(event, data, 2)}
-                    options={coinList}/>
+                    onChange={(event) => handleDropDownSelect(event, 2)}
+                    options={coinList}
+                    arrowPosition="right"/>
             </div>
         </>
     )
