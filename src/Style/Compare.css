@@ -107,11 +107,6 @@ ul:nth-child(2) {
 	}
 }
 
-.dropdown-container {
-	display: flex;
-	align-items:  center;
-}
-
 .versus-span {
 	font-size: var(--button-font-size);
 	font-weight: var(--button-font-weight);

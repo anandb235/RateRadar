@@ -1,8 +1,9 @@
 import React from 'react'
-import VirtualizedDropdown from "../Home/VirtualizedDropdown";
+import {VirtualizedDropdown} from "../Home/VirtualizedDropdown";
+
 import {useCoinInfoData} from "../../../Hooks/useCoinInfoData";
 
-const CompareCoin = ({coin, options, onChange, className}) => {
+const CompareCoin = ({coin, options, onChange, className, arrowPosition}) => {
 
     const {data, loading, error} = useCoinInfoData(coin)
 
@@ -16,10 +17,7 @@ const CompareCoin = ({coin, options, onChange, className}) => {
 
     return (
         <div className={`compare-coin-container ${className}`}>
-            <VirtualizedDropdown
-                value={coin}
-                options={options}
-                onChange={onChange}/>
+            <VirtualizedDropdown value={coin} options={options} handleOnChange={onChange} arrowPosition={arrowPosition} compare/>
             <div className="lists">
                 <ul>
                     <li>Rank</li>

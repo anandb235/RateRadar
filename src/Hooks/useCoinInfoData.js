@@ -4,6 +4,7 @@ import {COIN_DATA_CACHE, COIN_GECKO_COIN_INFO_URL, REFRESH_INTERVAL} from "../Da
 import {setRefreshTime, shouldRefreshData} from "../Services/RefreshService";
 
 export const useCoinInfoData = (coin) => {
+    const coinValue = coin.value;
     const dataObj = {
         marketRank: "NA",
         currentPrice: 0,
@@ -16,7 +17,7 @@ export const useCoinInfoData = (coin) => {
     }
 
     const [coinData, setCoinData] = useState(() => {
-        const cachedData = localStorage.getItem(COIN_DATA_CACHE(coin));
+        const cachedData = localStorage.getItem(COIN_DATA_CACHE(coinValue));
         return cachedData ? JSON.parse(cachedData) : null;
     });
     const [loading, setLoading] = useState(!coinData);
@@ -26,7 +27,7 @@ export const useCoinInfoData = (coin) => {
         const fetchCoinData = async () => {
             setLoading(true);
             try {
-                const res = await axios.get(COIN_GECKO_COIN_INFO_URL(coin));
+                const res = await axios.get(COIN_GECKO_COIN_INFO_URL(coinValue));
                 const obj = res.data
                 const marketData = obj["market_data"]
                 const cap = marketData["market_cap"]["usd"] || ''
@@ -46,25 +47,25 @@ export const useCoinInfoData = (coin) => {
                     }
                 }
                 setCoinData(objData)
-                localStorage.setItem(COIN_DATA_CACHE(coin), JSON.stringify(objData));
-                setRefreshTime(COIN_DATA_CACHE(coin))
+                localStorage.setItem(COIN_DATA_CACHE(coinValue), JSON.stringify(objData));
+                setRefreshTime(COIN_DATA_CACHE(coinValue))
                 setError(null);
             } catch (err) {
                 console.error(err);
-                setError(`Failed to info for ${coin}`);
+                setError(`Failed to info for ${coinValue}`);
             } finally {
                 setLoading(false);
             }
         };
 
-        if (shouldRefreshData(COIN_DATA_CACHE(coin))) {
+        if (shouldRefreshData(COIN_DATA_CACHE(coinValue))) {
             fetchCoinData();
         }
 
         const intervalId = setInterval(fetchCoinData, REFRESH_INTERVAL);
 
         return () => clearInterval(intervalId);
-    }, [coin]);
+    }, [coinValue]);
 
     const data = (coinData ? coinData : dataObj)
     return {data, loading, error};
