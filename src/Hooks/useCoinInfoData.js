@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {COIN_DATA_CACHE, COIN_GECKO_COIN_INFO_URL, REFRESH_INTERVAL} from "../Data/Constants";
 import {setRefreshTime, shouldRefreshData} from "../Services/RefreshService";
+import {getCachedData, setCachedData} from "../Services/StorageService";
 
 export const useCoinInfoData = (coin) => {
     const coinValue = coin.value;
@@ -16,10 +17,8 @@ export const useCoinInfoData = (coin) => {
         }
     }
 
-    const [coinData, setCoinData] = useState(() => {
-        const cachedData = localStorage.getItem(COIN_DATA_CACHE(coinValue));
-        return cachedData ? JSON.parse(cachedData) : null;
-    });
+    const [coinData, setCoinData] = useState(getCachedData(COIN_DATA_CACHE(coinValue), null));
+
     const [loading, setLoading] = useState(!coinData);
     const [error, setError] = useState(null);
 
@@ -47,7 +46,7 @@ export const useCoinInfoData = (coin) => {
                     }
                 }
                 setCoinData(objData)
-                localStorage.setItem(COIN_DATA_CACHE(coinValue), JSON.stringify(objData));
+                setCachedData(COIN_DATA_CACHE(coinValue), objData)
                 setRefreshTime(COIN_DATA_CACHE(coinValue))
                 setError(null);
             } catch (err) {
@@ -60,6 +59,8 @@ export const useCoinInfoData = (coin) => {
 
         if (shouldRefreshData(COIN_DATA_CACHE(coinValue))) {
             fetchCoinData();
+        } else {
+            setCoinData(getCachedData(COIN_DATA_CACHE(coinValue)));
         }
 
         const intervalId = setInterval(fetchCoinData, REFRESH_INTERVAL);
