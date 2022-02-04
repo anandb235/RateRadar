@@ -3,6 +3,7 @@ import {NavLink} from 'react-router-dom'
 
 import '../Style/Navbar.css'
 import Logo from '../Assets/RateRadar.svg'
+import {LoginButton} from "./GoogleLogin";
 
 const Navbar = () => {
 
@@ -19,7 +20,7 @@ const Navbar = () => {
                     <NavItem to="/compare" navId="compare" text="Compare"/>
                     <NavItem to="/about" navId="about" text="About"/>
                 </div>
-                <button className="bag-btn">Populate Bag</button>
+                <LoginButton />
             </div>
         </div>
     )

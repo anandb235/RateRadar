@@ -7,19 +7,22 @@ import About from './Components/About'
 import Navbar from './Components/Navbar'
 
 import './App.css'
+import {GoogleOAuthProvider} from "@react-oauth/google";
 
 const App = () => {
     return (
-        <Router>
-            <div className="router-container">
-                <Navbar/>
-                <Switch>
-                    <Route path="/" exact component={Home}/>
-                    <Route path="/compare" component={Compare}/>
-                    <Route path="/about" component={About}/>
-                </Switch>
-            </div>
-        </Router>
+        <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}>
+            <Router>
+                <div className="router-container">
+                    <Navbar/>
+                    <Switch>
+                        <Route path="/" exact component={Home}/>
+                        <Route path="/compare" component={Compare}/>
+                        <Route path="/about" component={About}/>
+                    </Switch>
+                </div>
+            </Router>
+        </GoogleOAuthProvider>
     )
 }
 
