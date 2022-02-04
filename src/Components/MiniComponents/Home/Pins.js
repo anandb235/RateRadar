@@ -8,11 +8,12 @@ import 'semantic-ui-css/components/transition.css'
 import {VirtualizedDropdown} from "./VirtualizedDropdown";
 import PinCharts from "./PinCharts";
 import {useCoinListData} from "../../../Hooks/useCoinListData";
+import {useCachedCoin} from "../../../Hooks/useCachedCoin";
 
 const Pins = () => {
 
-    const [selectedCoin1, setSelectedCoin1] = useState({label: 'bitcoin', value: 'bitcoin'})
-    const [selectedCoin2, setSelectedCoin2] = useState({label: 'ethereum', value: 'ethereum'})
+    const [selectedCoin1, setSelectedCoin1] = useCachedCoin("1")
+    const [selectedCoin2, setSelectedCoin2] = useCachedCoin("2")
 
     const {coinList, loading, error} = useCoinListData();
 

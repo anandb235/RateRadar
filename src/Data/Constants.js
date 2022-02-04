@@ -14,5 +14,6 @@ export const MARKET_DATA_CACHE = "marketDataLatest"
 export const COIN_LIST_CACHE = "coinListLatest"
 export const COIN_DATA_CACHE = (coin) => `coinDataLatest${capitalize(coin)}`
 export const COIN_MARKET_DATA_CACHE = (coin) => `coinMarketDataLatest${capitalize(coin)}`
+export const COIN_COMPARE_CACHE = (id) => `coinCompare_${id}`
 
 const capitalize = s => s && String(s[0]).toUpperCase() + String(s).slice(1)
