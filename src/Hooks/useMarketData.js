@@ -2,12 +2,10 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {COIN_GECKO_MARKET_URL, MARKET_DATA_CACHE, REFRESH_INTERVAL} from "../Data/Constants";
 import {setRefreshTime, shouldRefreshData} from "../Services/RefreshService";
+import {getCachedData, setCachedData} from "../Services/StorageService";
 
 export const useMarketData = () => {
-    const [marketData, setMarketData] = useState(() => {
-        const cachedData = localStorage.getItem(MARKET_DATA_CACHE);
-        return cachedData ? JSON.parse(cachedData) : [];
-    });
+    const [marketData, setMarketData] = useState(getCachedData(MARKET_DATA_CACHE,[]));
     const [loading, setLoading] =
         useState(!Array.isArray(marketData) || !marketData.length)
     const [error, setError] = useState(null);
@@ -25,7 +23,7 @@ export const useMarketData = () => {
                 color: coin["price_change_percentage_24h"] < 0 ? 'var(--on-error)' : 'var(--secondary)'
             }));
             setMarketData(formattedData);
-            localStorage.setItem(MARKET_DATA_CACHE, JSON.stringify(formattedData));
+            setCachedData(MARKET_DATA_CACHE, formattedData)
             setRefreshTime(MARKET_DATA_CACHE)
             setError(null);
         } catch (err) {

@@ -2,12 +2,10 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {COIN_GECKO_MARKET_CHART_URL, COIN_MARKET_DATA_CACHE, REFRESH_INTERVAL} from "../Data/Constants";
 import {setRefreshTime, shouldRefreshData} from "../Services/RefreshService";
+import {getCachedData, setCachedData} from "../Services/StorageService";
 
 export const useCoinMarketChartData = (coin) => {
-    const [coinMarketData, setCoinMarketData] = useState(() => {
-        const cachedData = localStorage.getItem(COIN_MARKET_DATA_CACHE(coin));
-        return cachedData ? JSON.parse(cachedData) : null;
-    });
+    const [coinMarketData, setCoinMarketData] = useState(getCachedData(COIN_MARKET_DATA_CACHE(coin), null));
     const [loading, setLoading] = useState(!coinMarketData);
     const [error, setError] = useState(null);
 
@@ -34,7 +32,7 @@ export const useCoinMarketChartData = (coin) => {
                     }]
                 }
                 setCoinMarketData(objData)
-                localStorage.setItem(COIN_MARKET_DATA_CACHE(coin), JSON.stringify(objData));
+                setCachedData(COIN_MARKET_DATA_CACHE(coin), objData)
                 setRefreshTime(COIN_MARKET_DATA_CACHE(coin))
                 setError(null);
             } catch (err) {
@@ -47,6 +45,8 @@ export const useCoinMarketChartData = (coin) => {
 
         if (shouldRefreshData(COIN_MARKET_DATA_CACHE(coin))) {
             fetchCoinMarketData();
+        } else {
+            return getCachedData(COIN_MARKET_DATA_CACHE(coin))
         }
 
         const intervalId = setInterval(fetchCoinMarketData, REFRESH_INTERVAL);

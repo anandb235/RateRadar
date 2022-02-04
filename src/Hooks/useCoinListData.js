@@ -2,12 +2,10 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import {COIN_GECKO_COIN_LIST_URL, COIN_LIST_CACHE, REFRESH_INTERVAL} from "../Data/Constants";
 import {setRefreshTime, shouldRefreshData} from "../Services/RefreshService";
+import {getCachedData, setCachedData} from "../Services/StorageService";
 
 export const useCoinListData = () => {
-    const [coinList, setCoinList] = useState(() => {
-        const cachedData = localStorage.getItem(COIN_LIST_CACHE);
-        return cachedData ? JSON.parse(cachedData) : [];
-    });
+    const [coinList, setCoinList] = useState(getCachedData(COIN_LIST_CACHE, []));
     const [loading, setLoading] = useState(!Array.isArray(coinList) || !coinList.length);
     const [error, setError] = useState(null);
 
@@ -22,7 +20,7 @@ export const useCoinListData = () => {
                 }
             });
             setCoinList(listItems);
-            localStorage.setItem(COIN_LIST_CACHE, JSON.stringify(listItems));
+            setCachedData(COIN_LIST_CACHE, listItems)
             setRefreshTime(COIN_LIST_CACHE)
             setError(null);
         } catch (err) {
