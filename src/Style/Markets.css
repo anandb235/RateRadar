@@ -31,8 +31,11 @@
     letter-spacing: var(--body1-letter-spacing);
     display: flex;
     flex-direction: column;
+    height: 77vh;
+}
+
+.market-card table tbody {
     overflow: auto;
-    height: 33vh;
 }
 
 .market-card tr > th {

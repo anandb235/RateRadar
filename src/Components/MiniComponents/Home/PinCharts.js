@@ -12,7 +12,7 @@ function PinCharts({coin, className}) {
 
     const customTicks = {
         grid: {
-            color: secondaryTranslucentColor, // Change the color of the x-axis grid lines
+            color: secondaryTranslucentColor,
         },
         ticks: {
             color: onSurfaceColor,
@@ -35,6 +35,7 @@ function PinCharts({coin, className}) {
                         weight: overlineFontWeight,
                         lineHeight: overlineLineSpacing
                     },
+                    boxWidth: 0
                 },
             },
         },
@@ -56,7 +57,7 @@ function PinCharts({coin, className}) {
 
     return (
         <div className={`card ${className}`}>
-            <div style={{width: '100%', height: '100%'}}>
+            <div style={{position:"relative", width: '99%', height: '99%'}}>
                 <Line data={coinMarketData} type="line" options={chartOptions}/>
             </div>
         </div>

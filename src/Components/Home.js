@@ -11,7 +11,6 @@ const Home = () => {
     return (
         <div className="home-container">
 			<Markets />
-			<YourBag />
 			<Pins />
 		</div>
     )
