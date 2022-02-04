@@ -13,27 +13,27 @@
 	border-radius: 5px;
 }
 
-.pin-card {
-	grid-area: c;
-	width: 98vw;
-	height: 100%;
-	display: flex;
-}
-
 .dropdown-area {
-	/*flex: 1;*/
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
 	align-items:  center;
 	gap: 15px;
+	padding: 2vh 0;
 }
-
 
 .chart1, .chart2 {
 	border: 2px dashed var(--secondary);
-	/*display: flex;*/
 	justify-content: center;
 	flex: 1;
-	max-width: 45vw;
+	max-height: 45%;
+}
+
+/*.chart1 > .card > div,*/
+/*.chart2 > .card > div {*/
+/*	width: 100% !important;*/
+/*	height: 100% !important;*/
+/*}*/
+
+.arrow-svg {
+	width: 150px;
 }
