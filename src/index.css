@@ -1,13 +1,12 @@
 html, body {
-  margin: 0;
-  -webkit-font-smoothing: antialiased;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
 
-  background-color: var(--background);
-  height: 100vh;
-  overflow: hidden;
+    background-color: var(--background);
+    height: 100vh;
+    overflow: hidden;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
