@@ -66,24 +66,41 @@
     --overline-font-size: 10px;
     --overline-font-weight: 400;
     --overline-letter-spacing: 1.5px;
-
 }
 
 /*darkmode*/
 :root {
     --primary: #3b4ab8;
     --secondary: #75cd96;
-    --on-primary: #dfdfdf;
+    --on-primary: #fafafa;
     --on-secondary: #0e0e0e;
     --primary-variant: #3543a5;
     --secondary-variant: #2f9455;
     --background: #2c2c2c;
     --surface: #1e1e1e;
     --error: #b83b4b;
-    --on-background: #dfdfdf;
-    --on-surface: #dfdfdf;
-    --on-error: #dfdfdf;
+    --on-background: #fafafa;
+    --on-surface: #fafafa;
+    --on-error: #fafafa;
     --secondary-translucent: rgba(117, 205, 150, 0.1);
+    --surface-opposite:#eaeaea;
+}
+
+.light-mode {
+    --primary: #3b4ab8;
+    --secondary: #2f9455;
+    --on-primary: #fafafa;
+    --on-secondary: #0e0e0e;
+    --primary-variant: #3543a5;
+    --secondary-variant: #75cd96;
+    --background: #d8d8d8;
+    --surface: #eaeaea;
+    --error: #b83b4b;
+    --on-background: #0e0e0e;
+    --on-surface: #0e0e0e;
+    --on-error: #fafafa;
+    --secondary-translucent: rgba(117, 205, 150, 0.1);
+    --surface-opposite: #1e1e1e;
 }
 
 .router-container {

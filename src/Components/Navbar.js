@@ -4,6 +4,7 @@ import {NavLink} from 'react-router-dom'
 import '../Style/Navbar.css'
 import Logo from '../Assets/RateRadar.svg'
 import {LoginButton} from "./GoogleLogin";
+import {ThemeChangeButton} from "./MiniComponents/Home/ThemeChangeButton";
 
 const Navbar = () => {
 
@@ -20,7 +21,8 @@ const Navbar = () => {
                     <NavItem to="/compare" navId="compare" text="Compare"/>
                     <NavItem to="/about" navId="about" text="About"/>
                 </div>
-                <LoginButton />
+                <LoginButton/>
+                <ThemeChangeButton />
             </div>
         </div>
     )
