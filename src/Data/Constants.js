@@ -17,5 +17,6 @@ export const COIN_MARKET_DATA_CACHE = (coin) => `coinMarketDataLatest${capitaliz
 export const COIN_COMPARE_CACHE = (id) => `coinCompare_${id}`
 
 export const THEME_CACHE = "theme"
+export const USER_CACHE = "googleUser"
 
 const capitalize = s => s && String(s[0]).toUpperCase() + String(s).slice(1)

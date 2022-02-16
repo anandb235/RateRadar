@@ -4,11 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {ThemeProvider} from "./Hooks/useTheme";
+import {UserProvider} from "./Hooks/useUser";
+import {GoogleOAuthProvider} from "@react-oauth/google";
 
 ReactDOM.render(
     <React.StrictMode>
         <ThemeProvider>
-            <App/>
+            <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID}>
+                <UserProvider>
+                    <App/>
+                </UserProvider>
+            </GoogleOAuthProvider>
         </ThemeProvider>
     </React.StrictMode>,
     document.getElementById('root')

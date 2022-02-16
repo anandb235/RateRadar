@@ -3,10 +3,12 @@ import {NavLink} from 'react-router-dom'
 
 import '../Style/Navbar.css'
 import Logo from '../Assets/RateRadar.svg'
-import {LoginButton} from "./GoogleLogin";
+import {LoginButton, LogoutButton} from "./GoogleLogin";
 import {ThemeChangeButton} from "./MiniComponents/Home/ThemeChangeButton";
+import {useUser} from "../Hooks/useUser";
 
 const Navbar = () => {
+    const {user} = useUser();
 
     return (
         <div className="nav-style">
@@ -19,10 +21,18 @@ const Navbar = () => {
                 <div className="nav-list">
                     <NavItem to="/" navId="home" text="Home"/>
                     <NavItem to="/compare" navId="compare" text="Compare"/>
+                    {user && <NavItem to="/bag" navId="bag" text="Bag"/>}
                     <NavItem to="/about" navId="about" text="About"/>
                 </div>
-                <LoginButton/>
-                <ThemeChangeButton />
+                {
+                    user ?
+                        <div className="user-heading">
+                            Hi, {user["given_name"]}
+                            <LogoutButton/>
+                        </div> :
+                        <LoginButton/>
+                }
+                <ThemeChangeButton/>
             </div>
         </div>
     )

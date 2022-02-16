@@ -5,3 +5,6 @@ export const getCachedData = (DATA_NAME, defaultValue) => {
 export const setCachedData = (DATA_NAME, data) => {
     localStorage.setItem(DATA_NAME, JSON.stringify(data))
 }
+export const clearCachedData = (DATA_NAME) => {
+    localStorage.removeItem(DATA_NAME)
+}
