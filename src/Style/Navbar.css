@@ -89,3 +89,23 @@
     width: 3px;
     background: var(--on-surface);
 }
+
+.user-heading {
+    font-size: var(--h5-font-size);
+    font-weight: var(--h5-font-weight);
+    letter-spacing: var(--h5-letter-spacing);
+    color:  var(--on-surface);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logout-icon {
+    color: var(--primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logout-icon:hover {
+    color:  var(--secondary);
+}
