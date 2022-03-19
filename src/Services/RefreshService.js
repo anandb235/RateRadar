@@ -5,7 +5,7 @@ export const shouldRefreshData = (DATA_NAME) => {
     const lastRefreshTime = localStorage.getItem(refreshTokenName)
     const currentTime = Date.now()
 
-    if (lastRefreshTime && (parseInt(lastRefreshTime) + REFRESH_INTERVAL > currentTime)){
+    if (lastRefreshTime && (parseInt(lastRefreshTime) + REFRESH_INTERVAL(10) > currentTime)){
         return false
     }
 

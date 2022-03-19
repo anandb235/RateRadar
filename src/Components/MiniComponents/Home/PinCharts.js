@@ -1,4 +1,4 @@
-import React, {useRef} from 'react'
+import React, {useMemo, useRef} from 'react'
 import {Line} from 'react-chartjs-2'
 import {useCoinMarketChartData} from "../../../Hooks/useCoinMarketChartData";
 
@@ -20,8 +20,8 @@ function PinCharts({coin, className}) {
                 },
             }
     }
-
-    const {coinMarketData, loading, error} = useCoinMarketChartData(coin)
+    const coins = useMemo(() => [coin], [coin]);
+    const {coinMarketData, loading, error} = useCoinMarketChartData(coins)
 
     if (loading) {
         return <div>Loading...</div>;
@@ -34,7 +34,7 @@ function PinCharts({coin, className}) {
     return (
         <div className={`card ${className}`}>
             <div style={{position: "relative", width: '99%', height: '99%'}}>
-                <Line ref={chartRef} data={coinMarketData} type="line"
+                <Line ref={chartRef} data={coinMarketData[coin]} type="line"
                       options={options}/>
             </div>
         </div>

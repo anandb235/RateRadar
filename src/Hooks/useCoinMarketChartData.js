@@ -1,17 +1,21 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {COIN_GECKO_MARKET_CHART_URL, COIN_MARKET_DATA_CACHE, REFRESH_INTERVAL} from "../Data/Constants";
-import {setRefreshTime, shouldRefreshData} from "../Services/RefreshService";
+import {COIN_GECKO_MARKET_CHART_URL, COIN_MARKET_DATA_CACHE} from "../Data/Constants";
 import {getCachedData, setCachedData} from "../Services/StorageService";
 
-export const useCoinMarketChartData = (coin) => {
-    const [coinMarketData, setCoinMarketData] = useState(getCachedData(COIN_MARKET_DATA_CACHE(coin), null));
-    const [loading, setLoading] = useState(!coinMarketData);
+export const useCoinMarketChartData = (coinList) => {
+    const [coinMarketData, setCoinMarketData] = useState(() => {
+        const newObj = {}
+        coinList.forEach((coin) => {
+            newObj[coin] = getCachedData(COIN_MARKET_DATA_CACHE(coin), null)
+        })
+        return newObj;
+    });
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchCoinMarketData = async () => {
-            setLoading(true);
+        const fetchCoinMarketData = async (coin) => {
             try {
                 let time = []
                 let price = []
@@ -31,35 +35,41 @@ export const useCoinMarketChartData = (coin) => {
                         borderColor: '#3b4ab8'
                     }]
                 }
-                setCoinMarketData(objData)
                 setCachedData(COIN_MARKET_DATA_CACHE(coin), objData)
-                setRefreshTime(COIN_MARKET_DATA_CACHE(coin))
-                setError(null);
+                return objData
             } catch (err) {
                 console.error(err);
                 setError(`Failed to info for ${coin}`);
-            } finally {
-                setLoading(false);
             }
         };
 
-        if (shouldRefreshData(COIN_MARKET_DATA_CACHE(coin))) {
-            fetchCoinMarketData();
-        } else {
-            return getCachedData(COIN_MARKET_DATA_CACHE(coin))
-        }
+        const fetchAllData = async () => {
+            const updatedCoinMarketData = {};
 
-        const intervalId = setInterval(fetchCoinMarketData, REFRESH_INTERVAL);
+            await Promise.all(coinList.map(async (coin) => {
+                let data = getCachedData(COIN_MARKET_DATA_CACHE(coin), null);
+                if (!data) {
+                    data = await fetchCoinMarketData(coin);
+                }
+                updatedCoinMarketData[coin] = data;
+            }));
 
-        return () => clearInterval(intervalId);
-    }, [coin]);
+            setCoinMarketData(updatedCoinMarketData);
+        };
+
+        fetchAllData().then(() => {
+            setLoading(false);
+            setError(null);
+        });
+    }, [coinList]);
 
     return {coinMarketData, loading, error};
 };
 
 const formatter = (timestamp) => {
-    const date = new Date(timestamp).getDate();
-    const month = new Date(timestamp).getMonth() + 1
-    const hour = new Date(timestamp).getHours()
-    return date + "/" + month + ": " + hour;
-}
+    const dateObj = new Date(timestamp);
+    const date = dateObj.getDate();
+    const month = dateObj.getMonth() + 1;
+    const hour = dateObj.getHours();
+    return `${date}/${month}: ${hour}`;
+};

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import CompareCoin from './MiniComponents/Compare/CompareCoin'
 import VersusAnimation from './MiniComponents/Compare/VersusAnimation'
 

@@ -3,14 +3,14 @@ import '../../../Style/Markets.css'
 import {useMarketData} from "../../../Hooks/useMarketData";
 
 const Markets = () => {
-    const { marketData, loading, error } = useMarketData(); // Corrected destructuring
+    const { marketData, loading, error } = useMarketData();
 
     if (loading) {
-        return <div>Loading...</div>; // Optional: Show loading state
+        return <div>Loading...</div>;
     }
 
     if (error) {
-        return <div>Error: {error}</div>; // Optional: Show error state
+        return <div>Error: {error}</div>;
     }
 
     return (
