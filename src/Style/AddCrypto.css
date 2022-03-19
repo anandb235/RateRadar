@@ -1,0 +1,66 @@
+.bag-crypto-adder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.crypto-adder-container {
+    flex: 1.5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:  30px;
+}
+
+.crypto-adder-icons {
+    color: var(--secondary);
+}
+
+.crypto-adder-result {
+    display:   flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items:  center;
+}
+
+.crypto-adder-input {
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: var(--surface);
+    color: var(--on-surface);
+    caret-color: var(--secondary);
+    border: 2px solid var(--secondary);
+    transition: border 0.5s ease;
+    -moz-appearance: textfield;
+}
+
+.crypto-adder-input::placeholder {
+    color: var(--secondary);
+    text-align: center;
+}
+
+.crypto-adder-input::-webkit-inner-spin-button,
+.crypto-adder-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.crypto-adder-input:focus {
+    border: 2px solid var(--primary) !important;
+    outline: none;
+}
+
+.crypto-adder-button {
+    background: var(--secondary);
+    color:  var(--on-secondary);
+    padding: 3px 10px;
+    border-radius: 5px;
+    outline: none;
+    font-size: var(--h3-font-weight);
+    font-weight: var(--overline-font-weight);
+    letter-spacing: var(--overline-letter-spacing);
+    /*cursor: pointer;*/
+}
