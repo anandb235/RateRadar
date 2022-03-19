@@ -1,45 +1,35 @@
 import {useEffect, useState} from "react";
-import axios from "axios";
-import {COIN_GECKO_COIN_LIST_URL, COIN_LIST_CACHE, REFRESH_INTERVAL} from "../Data/Constants";
-import {setRefreshTime, shouldRefreshData} from "../Services/RefreshService";
-import {getCachedData, setCachedData} from "../Services/StorageService";
+import {useMarketData} from "./useMarketData";
 
 export const useCoinListData = () => {
-    const [coinList, setCoinList] = useState(getCachedData(COIN_LIST_CACHE, []));
-    const [loading, setLoading] = useState(!Array.isArray(coinList) || !coinList.length);
-    const [error, setError] = useState(null);
-
-    const fetchCoinList = async () => {
-        setLoading(true);
-        try {
-            const res = await axios.get(COIN_GECKO_COIN_LIST_URL);
-            const listItems = res.data.map(coin => {
-                return {
-                    label: coin.name,
-                    value: coin.id,
-                }
-            });
-            setCoinList(listItems);
-            setCachedData(COIN_LIST_CACHE, listItems)
-            setRefreshTime(COIN_LIST_CACHE)
-            setError(null);
-        } catch (err) {
-            console.error(err);
-            setError('Failed to fetch market data');
-        } finally {
-            setLoading(false);
-        }
-    };
+    const [coinList, setCoinList] = useState([]);
+    const {marketData, loading: marketLoading, error: marketError} = useMarketData()
+    const [loading, setLoading] = useState(!Array.isArray(coinList) || !coinList.length || marketLoading);
+    const [error, setError] = useState(marketError);
 
     useEffect(() => {
-        if (shouldRefreshData(COIN_LIST_CACHE)) {
-            fetchCoinList();
-        }
+        const fetchCoinList = () => {
+            setLoading(true);
+            try {
+                const listItems = marketData.map(coin => {
+                    return {
+                        label: coin.name,
+                        value: coin.id,
+                    }
+                });
+                setCoinList(listItems);
+                setError(null);
+            } catch (err) {
+                console.error(err);
+                setError('Failed to fetch market data');
+            } finally {
+                setLoading(false);
+            }
+        };
 
-        const intervalId = setInterval(fetchCoinList, REFRESH_INTERVAL);
+        fetchCoinList();
 
-        return () => clearInterval(intervalId);
-    }, []);
+    }, [marketData]);
 
     return {coinList, loading, error};
 };

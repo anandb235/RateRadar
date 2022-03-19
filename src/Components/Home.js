@@ -1,6 +1,4 @@
 import React from 'react'
-
-import YourBag from './MiniComponents/Home/YourBag'
 import Markets from './MiniComponents/Home/Markets'
 import Pins from './MiniComponents/Home/Pins'
 

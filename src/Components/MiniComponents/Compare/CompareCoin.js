@@ -5,7 +5,7 @@ import {useCoinInfoData} from "../../../Hooks/useCoinInfoData";
 
 const CompareCoin = ({coin, options, onChange, className, arrowPosition}) => {
 
-    const {data, loading, error} = useCoinInfoData(coin)
+    const {coinData: data, loading, error} = useCoinInfoData(coin)
 
     if (loading) {
         return <div>Loading...</div>;

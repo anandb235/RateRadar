@@ -4,13 +4,16 @@ import {getCachedData, setCachedData} from "../Services/StorageService";
 
 
 export const useCachedCoin = (id) => {
-    const defaultCoin = id === "1" ? "bitcoin" : "ethereum"
+    const defaultCoin = id === "2" ? "ethereum" : "bitcoin"
     const setSelectedCoinInCache = (coin) => {
         setSelectedCoin(coin)
         setCachedData(COIN_COMPARE_CACHE(id), coin)
     }
 
-    const [selectedCoin, setSelectedCoin] = useState(getCachedData(COIN_COMPARE_CACHE(id), {label: defaultCoin, value: defaultCoin}))
+    const [selectedCoin, setSelectedCoin] = useState(getCachedData(COIN_COMPARE_CACHE(id), {
+        label: defaultCoin,
+        value: defaultCoin
+    }))
 
     return [selectedCoin, setSelectedCoinInCache]
 }
