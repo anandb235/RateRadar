@@ -1,6 +1,7 @@
 import React from 'react'
 import '../../../Style/Markets.css'
 import {useMarketData} from "../../../Hooks/useMarketData";
+import {RateTable} from "./RateTable";
 
 const Markets = () => {
     const { marketData, loading, error } = useMarketData();
@@ -22,26 +23,7 @@ const Markets = () => {
                 </div>
             </div>
             <div className="horizontal-divider"></div>
-            <table className="market-price-table">
-                <thead className="header-row">
-                <tr>
-                    <th>Currency</th>
-                    <th>Price</th>
-                    <th>Growth</th>
-                </tr>
-                </thead>
-                <tbody>
-                {marketData.map(coin => ( // Use marketData instead of data
-                    <tr key={coin.id}>
-                        <td>{coin.name}</td>
-                        <td>{coin.price}</td>
-                        <td style={{ color: coin.color, backgroundColor: coin.bgColor, borderRadius: '5px' }}>
-                            {coin.change}
-                        </td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
+            <RateTable data={marketData} columns={["Currency", "Price", "Growth"]}/>
         </div>
     );
 }
