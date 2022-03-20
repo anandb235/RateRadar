@@ -1,0 +1,65 @@
+.bag-card {
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.bag-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.bag-table-container {
+    flex: 2;
+    display:  flex;
+    align-items: center;
+    justify-content:  center;
+}
+
+.bag-right {
+    display:  flex;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+}
+
+.bag-table-container {
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    thead {
+        display: table;
+        width:  100%;
+        table-layout: fixed;
+    }
+
+    tbody {
+        display: block;
+        height: 25vh;
+        overflow-y: auto;
+        width: 100%;
+    }
+
+    tbody tr {
+        display: table;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    thead th {
+        padding-bottom: 20px;
+        margin-right: 12px;
+    }
+
+    th, td {
+        text-align: center;
+    }
+
+    tbody {
+        overflow: auto;
+    }
+}
