@@ -8,10 +8,15 @@ export const ThemeProvider = ({ children }) => {
     const [lightMode, setLightMode] = useState(() => {
         return getCachedData(THEME_CACHE, 'dark') === "light";
     });
+    const [themeLoading,  setThemeLoading] = useState(true);
 
     useEffect(() => {
-        document.body.classList.toggle('light-mode', lightMode);
-        setCachedData(THEME_CACHE, lightMode ? 'light' : 'dark')
+        setThemeLoading(true)
+        setTimeout(() => {
+            document.body.classList.toggle('light-mode', lightMode);
+            setCachedData(THEME_CACHE, lightMode ? 'light' : 'dark')
+        }, 100);
+        setTimeout(() => setThemeLoading(false), 300)
     }, [lightMode]);
     
     const toggleTheme =  () => {
@@ -19,7 +24,7 @@ export const ThemeProvider = ({ children }) => {
     }
     
     return (
-        <ThemeContext.Provider value={{lightMode, toggleTheme}}>
+        <ThemeContext.Provider value={{lightMode, toggleTheme, themeLoading}}>
             {children}
         </ThemeContext.Provider>
     )

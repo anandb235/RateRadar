@@ -2,7 +2,7 @@ import React from 'react'
 
 import '../../../Style/Card.css'
 import '../../../Style/Contact.css'
-import Github from '../../../Assets/Octicons-mark-github.svg'
+import {GitHubLogo} from '../../../Assets/svg'
 import Linkedin from '../../../Assets/LinkedIn_icon.svg'
 import Gmail from '../../../Assets/Gmail_icon_(2020).svg'
 import Instagram from '../../../Assets/Instagram_logo_2016.svg'
@@ -14,7 +14,7 @@ function Contact() {
             <span className="quote">Don't Feel Shy<br/>To Say Hi!</span>
 
             <div className="socials">
-                <Social link="https://github.com/anandb235" name="GitHub" logo={Github}/>
+                <Social link="https://github.com/anandb235" name="GitHub" logo={GitHubLogo} svg/>
                 <Social link="https://www.linkedin.com/in/anand-borkar/" name="LinkedIn" logo={Linkedin}/>
                 <Social link="mailto:borkaranand121@gmail.com" name="Gmail" logo={Gmail}/>
                 <Social link="https://www.instagram.com/borkaranand/" name="Instagram" logo={Instagram}/>
@@ -23,10 +23,15 @@ function Contact() {
     )
 }
 
-const Social = ({link, name, logo}) => {
+const Social = ({link, name, logo, svg}) => {
     return (
         <div className="social">
-            <img src={logo} alt={`${name} Logo`} />
+            {
+                svg ?
+                    logo:
+                    <img src={logo} alt={`${name} Logo`} />
+            }
+
             <a href={link} target="_new">{name}</a>
         </div>
     )

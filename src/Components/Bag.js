@@ -9,6 +9,7 @@ import {useOwnedCrypto} from "../Hooks/useOwnedCrypto";
 import {addOwnedCrypto, deleteOwnedCrypto, updateOwnedCrypto} from "../Services/StorageService";
 import {CryptoChart} from "./MiniComponents/Bag/CryptoChart";
 import {useMarketData} from "../Hooks/useMarketData";
+import {ChartPlaceHolder, TablePlaceHolder} from "../Assets/placeholders";
 
 const Bag = () => {
     const crypto = useOwnedCrypto()
@@ -55,11 +56,19 @@ const Bag = () => {
                 <div className="bag-left">
                     <AddCrypto onDataAdded={(data, remove) => addItem(data, remove)}/>
                     <div className="bag-table-container">
-                        <RateTable data={tableData} columns={["Currency", "Price", "Owned Value"]}/>
+                        {
+                            tableData.length ?
+                                <RateTable data={tableData} columns={["Currency", "Price", "Owned Value"]}/>:
+                                <TablePlaceHolder />
+                        }
                     </div>
                 </div>
                 <div className="bag-right">
-                    <CryptoChart coinList={crypto}/>
+                    {
+                        (Object.keys(crypto).length !== 0) ?
+                            <CryptoChart coinList={crypto}/>:
+                            <ChartPlaceHolder />
+                    }
                 </div>
             </div>
         </>

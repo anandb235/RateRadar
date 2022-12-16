@@ -13,13 +13,13 @@
 
 .bag-table-container {
     flex: 2;
-    display:  flex;
+    display: flex;
     align-items: center;
-    justify-content:  center;
+    justify-content: center;
 }
 
 .bag-right {
-    display:  flex;
+    display: flex;
     flex: 1;
     justify-content: center;
     align-items: center;
@@ -33,7 +33,7 @@
 
     thead {
         display: table;
-        width:  100%;
+        width: 100%;
         table-layout: fixed;
     }
 
@@ -61,5 +61,28 @@
 
     tbody {
         overflow: auto;
+    }
+}
+
+.table-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    div {
+        font-size: var(--h5-font-size);
+    }
+
+    img {
+        height: 350px;
+        width: 350px;
+    }
+
+    .placeholder-loader-container {
+        display: flex;
+        height: 350px;
+        width: 350px;
+        justify-content: center;
+        align-items: center;
     }
 }
