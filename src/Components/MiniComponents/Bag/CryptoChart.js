@@ -1,6 +1,9 @@
 import React, {useEffect, useMemo, useRef, useState} from "react";
 import {useCoinMarketChartData} from "../../../Hooks/useCoinMarketChartData";
 import {Line} from "react-chartjs-2";
+import {ShimmerBarChart} from "shimmer-effects-react";
+import {ErrorPlaceHolder} from "../../../Assets/placeholders";
+import {useTheme} from "../../../Hooks/useTheme";
 
 export const CryptoChart = ({coinList}) => {
 
@@ -11,7 +14,7 @@ export const CryptoChart = ({coinList}) => {
 
     const chartRef = useRef(null);
     const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
-
+    const {lightMode} = useTheme()
     const options = {
         responsive: true,
         maintainAspectRatio: false,
@@ -49,11 +52,19 @@ export const CryptoChart = ({coinList}) => {
     }, [coinList, coinMarketData, loading])
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <ShimmerBarChart
+            mode={lightMode ? "light" : "dark"}
+            chartType="random"
+            barWidth={"7%"}
+        />
     }
 
     if (error) {
-        return <div>Error: {error}</div>;
+        return (
+            <div>
+                <ErrorPlaceHolder/>
+            </div>
+        );
     }
 
     return <div style={{position: "relative", width: '99%', height: '70%'}}>

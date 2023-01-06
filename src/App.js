@@ -9,11 +9,10 @@ import Navbar from './Components/Navbar'
 import './App.css'
 import {useUser} from "./Hooks/useUser";
 import Bag from "./Components/Bag";
-import {useMarketData} from "./Hooks/useMarketData";
 
 const App = () => {
     const {user} = useUser();
-    useMarketData();
+
     return (
         <Router>
             <div className="router-container">

@@ -6,6 +6,9 @@ import '../Style/Compare.css'
 import '../Style/Card.css'
 import {useCoinListData} from "../Hooks/useCoinListData";
 import {useCachedCoin} from "../Hooks/useCachedCoin";
+import {ShimmerTitle} from "shimmer-effects-react";
+import {useTheme} from "../Hooks/useTheme";
+import {ErrorPlaceHolder} from "../Assets/placeholders";
 
 const Compare = () => {
 
@@ -13,13 +16,24 @@ const Compare = () => {
     const [selectedCoin2, setSelectedCoin2] = useCachedCoin("2")
 
     const {coinList, loading, error} = useCoinListData();
+    const {lightMode} = useTheme()
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className="card compare-card">
+            <ShimmerTitle
+                className="shimmer"
+                mode={lightMode ? "light" : "dark"}
+                line={10}
+                gap={8}/>
+        </div>;
     }
 
     if (error) {
-        return <div>Error: {error}</div>;
+        return (
+            <div className="card compare-card">
+                <ErrorPlaceHolder/>
+            </div>
+        );
     }
 
     const handleDropDownSelect = (event, dropdown) => {

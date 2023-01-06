@@ -1,17 +1,52 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import '../../../Style/Markets.css'
 import {useMarketData} from "../../../Hooks/useMarketData";
 import {RateTable} from "./RateTable";
+import {ShimmerTable} from "shimmer-effects-react";
+import {useTheme} from "../../../Hooks/useTheme";
+import {ErrorPlaceHolder} from "../../../Assets/placeholders";
 
 const Markets = () => {
-    const { marketData, loading, error } = useMarketData();
+    const {marketData, loading, error} = useMarketData();
+
+    const [tableData, setTableData] = useState([]);
+
+    const {lightMode} = useTheme()
+
+    useEffect(() => {
+        const newData = marketData.map((item) => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            color: item.color,
+            bgColor: item.bgColor,
+            change: item.percentChange.day
+        }))
+
+        setTableData(newData);
+    }, [marketData])
 
     if (loading) {
-        return <div>Loading...</div>;
+        return (
+            <div className="card market-card">
+                <ShimmerTable
+                    mode={lightMode ? "light" : "dark"}
+                    row={15}
+                    col={3}
+                    border={0}
+                    rounded={0.25}
+                    rowGap={10}
+                    colPadding={[10, 5, 10, 5]}
+                />
+            </div>);
     }
 
     if (error) {
-        return <div>Error: {error}</div>;
+        return (
+            <div className="card market-card">
+                <ErrorPlaceHolder />
+            </div>
+        );
     }
 
     return (
@@ -23,7 +58,7 @@ const Markets = () => {
                 </div>
             </div>
             <div className="horizontal-divider"></div>
-            <RateTable data={marketData} columns={["Currency", "Price", "Growth"]}/>
+            <RateTable data={tableData} columns={["Currency", "Price", "Growth (%)"]}/>
         </div>
     );
 }

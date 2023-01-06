@@ -9,6 +9,7 @@ import {VirtualizedDropdown} from "./VirtualizedDropdown";
 import PinCharts from "./PinCharts";
 import {useCoinListData} from "../../../Hooks/useCoinListData";
 import {useCachedCoin} from "../../../Hooks/useCachedCoin";
+import {ErrorPlaceHolder} from "../../../Assets/placeholders";
 
 const Pins = () => {
 
@@ -17,12 +18,10 @@ const Pins = () => {
 
     const {coinList, loading, error} = useCoinListData();
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
     if (error) {
-        return <div>Error: {error}</div>;
+        return <div className="card pin-card">
+            <ErrorPlaceHolder />
+        </div>;
     }
 
     const handleDropDownSelect = (event, dropdown) => {
@@ -40,11 +39,13 @@ const Pins = () => {
             <PinCharts className="chart1" coin={selectedCoin1.value}/>
             <div className="dropdown-area">
                 <VirtualizedDropdown
+                    loading={loading}
                     value={selectedCoin1}
                     options={coinList}
                     handleOnChange={(event) => handleDropDownSelect(event, 1)}/>
                 <ArrowSvg className="arrow-svg"/>
                 <VirtualizedDropdown
+                    loading={loading}
                     value={selectedCoin2}
                     options={coinList}
                     handleOnChange={(event) => handleDropDownSelect(event, 2)}/>

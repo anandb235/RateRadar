@@ -1,18 +1,16 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {COIN_GECKO_MARKET_URL, MARKET_DATA_CACHE, REFRESH_INTERVAL} from "../Data/Constants";
+import {COIN_GECKO_MARKET_URL, DEFAULT_LOADING_TIMEOUT, MARKET_DATA_CACHE, REFRESH_INTERVAL} from "../Data/Constants";
 import {setRefreshTime, shouldRefreshData} from "../Services/RefreshService";
 import {getCachedData, setCachedData} from "../Services/StorageService";
 
 export const useMarketData = () => {
     const [marketData, setMarketData] = useState(getCachedData(MARKET_DATA_CACHE, []));
-    const [loading, setLoading] =
-        useState(!Array.isArray(marketData) || !marketData.length)
+    const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchMarketData = async () => {
-            setLoading(true);
             try {
                 const res = await axios.get(COIN_GECKO_MARKET_URL);
 
@@ -47,15 +45,14 @@ export const useMarketData = () => {
             } catch (err) {
                 console.error(err);
                 setError('Failed to fetch market data');
-            } finally {
-                setLoading(false);
             }
         };
-
 
         if (shouldRefreshData(MARKET_DATA_CACHE)) {
             fetchMarketData();
         }
+
+        setTimeout(() => setLoading(false), DEFAULT_LOADING_TIMEOUT)
 
         const intervalId = setInterval(fetchMarketData, REFRESH_INTERVAL(10));
 

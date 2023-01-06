@@ -6,9 +6,12 @@ import Logo from '../Assets/RateRadar.svg'
 import {LoginButton, LogoutButton} from "./GoogleLogin";
 import {ThemeChangeButton} from "./MiniComponents/Home/ThemeChangeButton";
 import {useUser} from "../Hooks/useUser";
+import {ShimmerDiv} from "shimmer-effects-react";
+import {useTheme} from "../Hooks/useTheme";
 
 const Navbar = () => {
-    const {user} = useUser();
+    const {user, userLoading} = useUser();
+    const {lightMode} = useTheme()
 
     return (
         <div className="nav-style">
@@ -21,16 +24,22 @@ const Navbar = () => {
                 <div className="nav-list">
                     <NavItem to="/" navId="home" text="Home"/>
                     <NavItem to="/compare" navId="compare" text="Compare"/>
-                    {user && <NavItem to="/bag" navId="bag" text="Bag"/>}
+                    {
+                        userLoading ?
+                            <ShimmerDiv mode={lightMode ? "light" : "dark"} height={25} width={50}/> :
+                            user && <NavItem to="/bag" navId="bag" text="Bag"/>
+                    }
                     <NavItem to="/about" navId="about" text="About"/>
                 </div>
                 {
-                    user ?
-                        <div className="user-heading">
-                            Hi, {user["given_name"]}
-                            <LogoutButton/>
-                        </div> :
-                        <LoginButton/>
+                    userLoading ?
+                        <ShimmerDiv mode={lightMode ? "light" : "dark"} height={35} width={125}/> :
+                        user ?
+                            <div className="user-heading">
+                                Hi, {user["given_name"]}
+                                <LogoutButton/>
+                            </div> :
+                            <LoginButton/>
                 }
                 <ThemeChangeButton/>
             </div>
