@@ -9,12 +9,16 @@ import {useOwnedCrypto} from "../Hooks/useOwnedCrypto";
 import {addOwnedCrypto, deleteOwnedCrypto, updateOwnedCrypto} from "../Services/StorageService";
 import {CryptoChart} from "./MiniComponents/Bag/CryptoChart";
 import {useMarketData} from "../Hooks/useMarketData";
-import {ChartPlaceHolder, TablePlaceHolder} from "../Assets/placeholders";
+import {ChartPlaceHolder, ErrorPlaceHolder, TablePlaceHolder} from "../Assets/placeholders";
+import {ShimmerBarChart, ShimmerTable} from "shimmer-effects-react";
+import {useTheme} from "../Hooks/useTheme";
 
 const Bag = () => {
-    const crypto = useOwnedCrypto()
-    const {marketData, loading: marketLoading} = useMarketData()
-
+    const {crypto, loading: cryptoLoading} = useOwnedCrypto()
+    const {marketData, loading: marketLoading, error: marketError} = useMarketData()
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(false);
+    const {lightMode} = useTheme()
 
     const [tableData, setTableData] = useState([])
 
@@ -24,18 +28,18 @@ const Bag = () => {
         if (index === -1) {
             if (remove) return
             //1: create
-            addOwnedCrypto(item)
+            addOwnedCrypto(item, setLoading, setError)
         } else if (remove) {
             //2: delete
-            deleteOwnedCrypto({...item, docId: crypto[index].docId})
+            deleteOwnedCrypto({...item, docId: crypto[index].docId}, setLoading, setError)
         } else {
             //3: update
-            updateOwnedCrypto({...item, docId: crypto[index].docId})
+            updateOwnedCrypto({...item, docId: crypto[index].docId}, setLoading, setError)
         }
     }
 
     useEffect(() => {
-        if (marketLoading) setTableData([])
+        if (marketLoading || cryptoLoading) setTableData([])
 
         const amountMap = new Map(crypto.map(obj => [obj.id, {change: obj.owned, docId: obj.docId}]))
 
@@ -48,7 +52,15 @@ const Bag = () => {
 
         setTableData(result)
 
-    }, [crypto, marketData, marketLoading]);
+    }, [crypto, marketData, marketLoading, cryptoLoading]);
+
+    if (error || marketError) {
+        return (
+            <div className="card bag-card">
+                <ErrorPlaceHolder/>
+            </div>
+        );
+    }
 
     return (
         <>
@@ -57,17 +69,34 @@ const Bag = () => {
                     <AddCrypto onDataAdded={(data, remove) => addItem(data, remove)}/>
                     <div className="bag-table-container">
                         {
-                            tableData.length ?
-                                <RateTable data={tableData} columns={["Currency", "Price", "Owned Value"]}/>:
-                                <TablePlaceHolder />
+                            !(marketLoading || cryptoLoading || loading) ?
+                                tableData.length ?
+                                    <RateTable data={tableData} columns={["Currency", "Price", "Owned Value"]}/> :
+                                    <TablePlaceHolder/> :
+                                <ShimmerTable
+                                    className="shimmer"
+                                    mode={lightMode ? "light" : "dark"}
+                                    row={5}
+                                    col={3}
+                                    border={0}
+                                    rounded={0.25}
+                                    rowGap={10}
+                                    colPadding={[10, 5, 10, 5]}
+                                />
                         }
                     </div>
                 </div>
                 <div className="bag-right">
                     {
-                        (Object.keys(crypto).length !== 0) ?
-                            <CryptoChart coinList={crypto}/>:
-                            <ChartPlaceHolder />
+                        !(marketLoading || cryptoLoading || loading) ?
+                            (Object.keys(crypto).length !== 0) ?
+                                <CryptoChart coinList={crypto}/> :
+                                <ChartPlaceHolder/> :
+                            <ShimmerBarChart
+                                mode={lightMode ? "light" : "dark"}
+                                chartType="random"
+                                barWidth={"7%"}
+                            />
                     }
                 </div>
             </div>

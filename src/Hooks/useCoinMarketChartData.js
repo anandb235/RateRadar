@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {COIN_GECKO_MARKET_CHART_URL, COIN_MARKET_DATA_CACHE} from "../Data/Constants";
+import {COIN_GECKO_MARKET_CHART_URL, COIN_MARKET_DATA_CACHE, DEFAULT_LOADING_TIMEOUT} from "../Data/Constants";
 import {getCachedData, setCachedData} from "../Services/StorageService";
 
 export const useCoinMarketChartData = (coinList) => {
@@ -58,7 +58,7 @@ export const useCoinMarketChartData = (coinList) => {
         };
 
         fetchAllData().then(() => {
-            setLoading(false);
+            setTimeout(()=>setLoading(false), DEFAULT_LOADING_TIMEOUT)
             setError(null);
         });
     }, [coinList]);

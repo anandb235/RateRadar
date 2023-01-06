@@ -2,22 +2,40 @@ import React from 'react'
 import {VirtualizedDropdown} from "../Home/VirtualizedDropdown";
 
 import {useCoinInfoData} from "../../../Hooks/useCoinInfoData";
+import {ShimmerSectionHeader} from "shimmer-effects-react";
+import {useTheme} from "../../../Hooks/useTheme";
+import {ErrorPlaceHolder} from "../../../Assets/placeholders";
 
 const CompareCoin = ({coin, options, onChange, className, arrowPosition}) => {
 
     const {coinData: data, loading, error} = useCoinInfoData(coin)
+    const {lightMode} = useTheme()
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className={`compare-coin-container ${className}`}>
+            <ShimmerSectionHeader
+                className="shimmer"
+                center={true}
+                titleHeight={40}
+                titleGap={50}
+                subtitleGap={35}
+                mode={lightMode ?  "light" : "dark"}
+            />
+        </div>;
     }
 
     if (error) {
-        return <div>Error: {error}</div>;
+        return (
+            <div className={`compare-coin-container ${className}`}>
+                <ErrorPlaceHolder/>
+            </div>
+        );
     }
 
     return (
         <div className={`compare-coin-container ${className}`}>
-            <VirtualizedDropdown value={coin} options={options} handleOnChange={onChange} arrowPosition={arrowPosition} compare/>
+            <VirtualizedDropdown loading={loading} value={coin} options={options} handleOnChange={onChange}
+                                 arrowPosition={arrowPosition} compare/>
             <div className="lists">
                 <ul>
                     <li>Rank</li>

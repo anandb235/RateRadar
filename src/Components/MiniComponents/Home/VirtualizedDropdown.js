@@ -2,9 +2,28 @@ import React from 'react'
 import ReactSelect, {createFilter} from 'react-select'
 import {FixedSizeList as List} from 'react-window'
 import '../../../Style/VirtualizedDropdown.css'
+import {ShimmerBarChart, ShimmerDiv} from "shimmer-effects-react";
+import {useTheme} from "../../../Hooks/useTheme";
 
 
-export const VirtualizedDropdown = ({value, options, handleOnChange, arrowPosition = "right", compare = false}) => {
+export const VirtualizedDropdown = ({
+                                        loading,
+                                        value,
+                                        options,
+                                        handleOnChange,
+                                        arrowPosition = "right",
+                                        compare = false
+                                    }) => {
+    const {lightMode} = useTheme()
+    if (loading) {
+        return <div>
+            <ShimmerDiv
+                mode={lightMode ? "light" : "dark"}
+                height={25}
+                width={100}
+            />
+        </div>;
+    }
 
     const IndicatorSeparator = () => null;
 

@@ -1,9 +1,12 @@
 import {useEffect, useState} from "react";
 import {collection, onSnapshot} from "firebase/firestore";
 import {db} from "../Services/FirebaseService";
+import {DEFAULT_LOADING_TIMEOUT} from "../Data/Constants";
 
 export const useOwnedCrypto = () => {
     const [crypto, setCrypto] = useState([]);
+
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const unsubscribe = onSnapshot(collection(db, "ownedCrypto"), (snapshot) => {
@@ -13,10 +16,11 @@ export const useOwnedCrypto = () => {
             }));
 
             setCrypto(cryptoData)
+            setTimeout(()=>setLoading(false),DEFAULT_LOADING_TIMEOUT);
         })
 
         return () => unsubscribe();
     }, [])
 
-    return crypto;
+    return {crypto, loading};
 }

@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {useMarketData} from "./useMarketData";
+import {DEFAULT_LOADING_TIMEOUT} from "../Data/Constants";
 
 export const useCoinInfoData = (coin) => {
     const coinValue = coin.value;
@@ -31,7 +32,7 @@ export const useCoinInfoData = (coin) => {
                 console.error(err);
                 setError(`Failed to info for ${coinValue}`);
             } finally {
-                setLoading(false);
+                setTimeout(()=>setLoading(false), DEFAULT_LOADING_TIMEOUT)
             }
         };
 

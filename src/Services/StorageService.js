@@ -1,5 +1,6 @@
 import {collection, getDocs, doc, updateDoc, addDoc, deleteDoc} from "firebase/firestore";
 import {db} from "./FirebaseService";
+import {DEFAULT_LOADING_TIMEOUT} from "../Data/Constants";
 
 
 export const getCachedData = (DATA_NAME, defaultValue) => {
@@ -13,20 +14,27 @@ export const clearCachedData = (DATA_NAME) => {
     localStorage.removeItem(DATA_NAME)
 }
 
-export const addOwnedCrypto = (data) => {
+export const addOwnedCrypto = (data, setLoading, setError) => {
     addDoc(collection(db, "ownedCrypto"), data)
-        .then(() => console.log("Added to database"))
-        .catch((e) => console.log("Error adding to database: ", e))
+        .catch(() => setError(true))
+        .finally(()=>{
+            setTimeout(()=>setLoading(false), DEFAULT_LOADING_TIMEOUT)
+        })
 }
 
-export const deleteOwnedCrypto = (data) => {
+export const deleteOwnedCrypto = (data, setLoading, setError) => {
     deleteDoc(doc(db, "ownedCrypto", data.docId))
-        .then(() => console.log("Deleted from database"))
-        .catch((e) => console.log("Error deleting from database: ", e));
+        .catch(() => setError(true))
+        .finally(()=>{
+            setTimeout(()=>setLoading(false), DEFAULT_LOADING_TIMEOUT)
+        })
 }
 
-export const updateOwnedCrypto = (data) => {
+export const updateOwnedCrypto = (data, setLoading, setError) => {
     updateDoc(doc(db, "ownedCrypto", data.docId), {owned: data.owned})
         .then(() => console.log("Updated database"))
-        .catch((e) => console.log("Error updating database: ", e));
+        .catch(() => setError(true))
+        .finally(()=>{
+            setTimeout(()=>setLoading(false), DEFAULT_LOADING_TIMEOUT)
+        })
 }

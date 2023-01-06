@@ -5,12 +5,16 @@ import {useCoinListData} from "../../../Hooks/useCoinListData";
 import {Equal, Multiply} from "../../../Assets/svg";
 import '../../../Style/AddCrypto.css'
 import {useCoinInfoData} from "../../../Hooks/useCoinInfoData";
+import {ErrorPlaceHolder} from "../../../Assets/placeholders";
+import {ShimmerDiv} from "shimmer-effects-react";
+import {useTheme} from "../../../Hooks/useTheme";
 
 export const AddCrypto = ({onDataAdded}) => {
     const [selectedCoin, setSelectedCoin] = useCachedCoin("3")
     const {coinList, loading, error} = useCoinListData();
     const {coinData} = useCoinInfoData(selectedCoin)
     const [inputValue, setInputValue] = useState("");
+    const {lightMode} = useTheme()
 
     const preventMinus = (e) => {
         if (e.code === 'Minus' || e.code === 'KeyE' || e.code === 'Equal') {
@@ -48,11 +52,17 @@ export const AddCrypto = ({onDataAdded}) => {
     }
 
     if (loading || !coinData) {
-        return <div>Loading...</div>;
+        return <div className="crypto-adder-container">
+            <ShimmerDiv mode={lightMode ? "light" : "dark"} height={50} width={300} />
+        </div>;
     }
 
     if (error) {
-        return <div>Error: {error}</div>;
+        return (
+            <div className="crypto-adder-container">
+                <ErrorPlaceHolder/>
+            </div>
+        );
     }
 
     return (

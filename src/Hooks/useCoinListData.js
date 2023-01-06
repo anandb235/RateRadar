@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import {useMarketData} from "./useMarketData";
+import {DEFAULT_LOADING_TIMEOUT} from "../Data/Constants";
 
 export const useCoinListData = () => {
     const [coinList, setCoinList] = useState([]);
@@ -22,12 +23,11 @@ export const useCoinListData = () => {
             } catch (err) {
                 console.error(err);
                 setError('Failed to fetch market data');
-            } finally {
-                setLoading(false);
             }
         };
 
         fetchCoinList();
+        setTimeout(() => setLoading(false), DEFAULT_LOADING_TIMEOUT);
 
     }, [marketData]);
 
