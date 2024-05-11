@@ -6,7 +6,7 @@ export const RateTable = ({data, columns}) =>
         <tr>
             {
                 columns.map((i) =>
-                    <th>{i}</th>
+                    <th key={i}>{i}</th>
                 )
             }
         </tr>
