@@ -40,7 +40,7 @@
 .about-card p span:nth-child(1),
 .about-card p span:nth-child(2),
 .about-card p span:nth-child(3) {
-    font-weight: 600;
+    font-weight: var(--special-600-font-weight);
 }
 
 .about-card a {
@@ -78,7 +78,7 @@
     position: absolute;
     color: var(--on-secondary);
     font-size: var(--h4-font-size);
-    font-weight:  900;
+    font-weight:  var(--special-900-font-weight);
     letter-spacing:  var(--h4-letter-spacing);
     text-shadow: 1px 5px 0 var(--secondary);
     transform: rotate(270deg) translate(0, -50px);
