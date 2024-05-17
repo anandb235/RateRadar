@@ -78,6 +78,8 @@
 
     div {
         font-size: var(--h5-font-size);
+        font-weight: var(--h5-font-weight);
+        letter-spacing: var(--h5-letter-spacing);
     }
 
     img {

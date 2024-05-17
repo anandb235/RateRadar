@@ -1,13 +1,14 @@
 import {VirtualizedDropdown} from "../Home/VirtualizedDropdown";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useCachedCoin} from "../../../Hooks/useCachedCoin";
 import {useCoinListData} from "../../../Hooks/useCoinListData";
-import {Equal, Multiply} from "../../../Assets/svg";
+import {Equal, Minus, Multiply, Plus} from "../../../Assets/svg";
 import '../../../Style/AddCrypto.css'
 import {useCoinInfoData} from "../../../Hooks/useCoinInfoData";
 import {ErrorPlaceHolder} from "../../../Assets/placeholders";
 import {ShimmerDiv} from "shimmer-effects-react";
 import {useTheme} from "../../../Hooks/useTheme";
+import {useOwnedCrypto} from "../../../Hooks/useOwnedCrypto";
 
 export const AddCrypto = ({onDataAdded}) => {
     const [selectedCoin, setSelectedCoin] = useCachedCoin("3")
@@ -15,6 +16,8 @@ export const AddCrypto = ({onDataAdded}) => {
     const {coinData} = useCoinInfoData(selectedCoin)
     const [inputValue, setInputValue] = useState("");
     const {lightMode} = useTheme()
+    const [showRemove, setShowRemove] = useState(false);
+    const {crypto, loading: cryptoLoading} = useOwnedCrypto()
 
     const preventMinus = (e) => {
         if (e.code === 'Minus' || e.code === 'KeyE' || e.code === 'Equal') {
@@ -39,21 +42,30 @@ export const AddCrypto = ({onDataAdded}) => {
         setInputValue(parseFloat(value).toString())
     }
 
-    const handleDataAddition = () => {
-        if (inputValue === "") return;
+    const handleDataAddition = (remove) => {
+        if (inputValue === "" && !remove) return;
 
         const data = {
             id: selectedCoin.value,
             owned: parseFloat(inputValue) | 0
         }
 
-        onDataAdded(data, inputValue === "0");
+        onDataAdded(data, remove || inputValue === "0");
         setInputValue("")
     }
 
-    if (loading || !coinData) {
+    useEffect(() => {
+        if (cryptoLoading) return;
+
+        const found = crypto.findIndex((obj) => obj.id === selectedCoin.value);
+
+        setShowRemove(found !== -1)
+
+    }, [crypto, cryptoLoading, selectedCoin])
+
+    if (loading || !coinData || cryptoLoading) {
         return <div className="crypto-adder-container">
-            <ShimmerDiv mode={lightMode ? "light" : "dark"} height={50} width={300} />
+            <ShimmerDiv mode={lightMode ? "light" : "dark"} height={50} width={300}/>
         </div>;
     }
 
@@ -81,7 +93,19 @@ export const AddCrypto = ({onDataAdded}) => {
                     <div>USD {parseFloat(inputValue) * coinData.currentPrice | 0}</div>
                 </div>
             </div>
-            <button className="crypto-adder-button" onClick={handleDataAddition}>ADD</button>
+            <div className="add-remove-container">
+                <button className="crypto-adder-button" onClick={() => handleDataAddition(false)}>
+                    <Plus/>
+                    {showRemove ? "UPDATE" : "ADD"}
+                </button>
+                {
+                    showRemove &&
+                    <button className="crypto-adder-button" onClick={() => handleDataAddition(true)}>
+                        <Minus/>
+                        REMOVE
+                    </button>
+                }
+            </div>
         </div>
     )
 }

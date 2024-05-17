@@ -66,6 +66,8 @@
     --overline-font-size: 10px;
     --overline-font-weight: 400;
     --overline-letter-spacing: 1.5px;
+    --special-600-font-weight: 600;
+    --special-900-font-weight: 900;
 }
 
 /*darkmode*/
