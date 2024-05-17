@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {ThemeProvider} from "./Hooks/useTheme";
-import {UserProvider} from "./Hooks/useUser";
+import {ThemeProvider} from "./hooks/useTheme";
+import {UserProvider} from "./hooks/useUser";
 import {GoogleOAuthProvider} from "@react-oauth/google";
 
 ReactDOM.render(

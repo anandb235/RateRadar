@@ -1,14 +1,14 @@
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom'
 
-import Home from './Components/Home'
-import Compare from './Components/Compare'
-import About from './Components/About'
+import Home from './components/Home'
+import Compare from './components/Compare'
+import About from './components/About'
 
-import Navbar from './Components/Navbar'
+import Navbar from './components/Navbar'
 
 import './App.css'
-import {useUser} from "./Hooks/useUser";
-import Bag from "./Components/Bag";
+import {useUser} from "./hooks/useUser";
+import Bag from "./components/Bag";
 
 const App = () => {
     const {user} = useUser();
